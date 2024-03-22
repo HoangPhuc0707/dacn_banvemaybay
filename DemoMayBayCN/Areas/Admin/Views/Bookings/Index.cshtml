@@ -1,0 +1,320 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<div class="card card-title bg-white p-1">
+    <div class="row">
+        <div class="col-md-6 "> <h5 class="pl-2 mt-2 text-blues">Quản lý vé </h5> </div>
+        <div class="col-md-6 m-0">
+        </div>
+    </div>
+</div>
+
+<div class="search-container">
+    <label for="SearchString" style="margin-right: 10px">Tìm tên khách hàng : </label>
+    <input type="text" id="searchInput" placeholder="Nhập tên khách hàng ">
+    <input type="submit" value="Tìm kiếm" id="search-button">
+</div>
+
+@*<button class="btn btn-primary add"><i class="fas fa-plus"></i>Thêm vé</button>*@
+
+<div id="app"></div>
+<div id="pagination"></div>
+
+<div class="modal" id="addBookingModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bảng thông tin vé</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Đặt nội dung của form thêm thành phố ở đây -->
+                <form id="addBookingForm">
+                    <div id="booking"></div>
+                     <div class="form-group row">
+                        <label for="SoHieuGhe" class="col-md-3 col-form-label">Số hiệu ghế</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="SeatNumber" name="SeatNumber">
+                                <option value="SeatNumber"></option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeBookingBtn" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="saveBookingBtn">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $.formattedDate = function (dateToFormat) {
+        var dateObject = new Date(dateToFormat);
+        var day = dateObject.getDate();
+        var month = dateObject.getMonth() + 1;
+        var year = dateObject.getFullYear();
+        day = day < 10 ? "0" + day : day;
+        month = month < 10 ? "0" + month : month;
+        var formattedDate = day + "/" + month + "/" + year;
+        return formattedDate;
+    };
+    var currentPage = 1;
+    function getBookings(fullName, pageNumber) {
+        $.ajax({
+            url: '/api/Bookings/GetAllBooking',
+            method: "GET",
+            data: {
+                keySearch: fullName,
+                PageNumber: pageNumber,
+            },
+            success: function (data) {
+                renderTable(data.data);
+                displayPagination(data.pagination);
+                currentPage = pageNumber;
+            }
+        });
+    }
+    function renderTable(bookings) {
+        const tableHeader = `
+                <tr>
+                    <th>Id</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số hiệu máy bay</th>
+                    <th>Ngày đặt vé</th>
+                    <th>Trạng thái đặt chỗ</th>
+                    <th>Số hiệu ghế</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái thanh toán</th>
+                    <th>Mã xác nhận</th>
+                    <th></th>
+                </tr>
+            `;
+        const bookingsHtml = bookings.map(booking => `
+                <tr>
+                    <td>${booking.bookingID}</td>
+                    <td>${booking.passengers.fullName}</td>
+                    <td>${booking.flights.flightNumber}</td>
+                    <td>${$.formattedDate(booking.bookingDate)}</td>
+                    <td class="${booking.bookingStatus == 'true' ? 'text-danger' : 'text-success'}">${booking.bookingStatus == "true" ? 'Chưa đặt chỗ' : 'đã đặt chỗ'} </td>
+                    <td>${booking.seats.seatNumber}</td>
+                    <td>${booking.totalPrice}</td>
+                    <td class="${booking.payments.paymentMethod == 'true' ? 'text-danger' : 'text-success'}">${booking.payments.paymentMethod == "true" ? 'Chưa thanh toán' : 'đã thanh toán'}</td>
+                    <td>${booking.verification}</td>
+                    <td>
+                        <button data-id="${booking.bookingID}" data-seat-id="${booking.seats.seatClass}" class="edit-btn btn btn-primary" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        <button data-id="${booking.bookingID}" data-seat-id="${booking.seats.seatClass}" class="detail-btn btn btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                        <button data-id="${booking.bookingID}" class="delete-btn btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        const tableHtml = `<table class="table table-striped" id="tblBrands">${tableHeader}${bookingsHtml}</table>`;
+        $('#app').html(tableHtml);
+    }
+    function displayPagination(paginationInfo) {
+        var totalPages = paginationInfo.totalPages;
+        var currentPage = paginationInfo.currentPage;
+        var fullName = $('#searchInput').val();
+        var paginationHtml = '<div class="pagination">';
+        if (currentPage > 1) {
+            paginationHtml += '<a href="#" onclick="getBookings(\'' + fullName + '\',' + (currentPage - 1) + ')">&laquo;</a>';
+        }
+        for (var i = 1; i <= totalPages; i++) {
+            if (i === currentPage) {
+                paginationHtml += '<a href="#" class="active" onclick="getBookings(\'' + fullName + '\',' + i + ')">' + i + '</a>';
+            }
+            else {
+                paginationHtml += '<a href="#" onclick="getBookings(\'' + fullName + '\',' + i + ')">' + i + '</a>';
+            }
+        }
+        if (currentPage < totalPages) {
+            paginationHtml += '<a href="#" onclick="getBookings(\'' + fullName + '\',' + (currentPage + 1) + ')">&raquo;</a>';
+        }
+        paginationHtml += '</div>';
+
+
+        $('#pagination').html(paginationHtml);
+    }
+    $(document).ready(function () {
+        var currentBookingId = '';
+        $('#search-button').click(function (e) {
+            e.preventDefault();
+            var fullName = $('#searchInput').val();
+            var pageNumber = 1;
+            if (fullName == "") {
+                alert("không tìm thấy tên cần tìm")
+            }
+            getBookings(fullName, pageNumber);
+        });
+
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var pageNumber = $(this).text();
+            var fullName = $('#searchInput').val();
+            getBookings(fullName, pageNumber);
+        });
+        getBookings('', 1);
+
+        function refreshTable() {
+            var fullName = $('#searchInput').val();
+            getBookings(fullName, currentPage);
+        }
+
+        function resetInputs() {
+            $('input[type="text"]').each(function () {
+                $(this).val('');
+            });
+        }
+
+        function showButton() {
+            $('#saveBookingBtn').show();
+            $('#closeBookingBtn').show();
+        }
+
+        $('.close, .btn-secondary').click(function (e) {
+            $('#addBookingModal').modal('hide')
+            resetInputs();
+        });
+
+        $('#app').on('click', '.edit-btn', function () {
+            $('#addBookingModal').modal('show');
+            showButton();
+            var bookingId = $(this).data('id');
+            var seatClass = $(this).data('seat-id');
+            currentBookingId = bookingId;
+            $.ajax({
+                url: '/api/Bookings/GetBooking',
+                method: 'GET',
+                data: {
+                    id: bookingId
+                },
+                success: function (data) {
+                    booking = data.data;
+                    $('#SeatNumber').empty();
+
+                    booking[0].flights.seats.forEach(function (seat) {
+                        if(seat.seatAvailable == 0 && seat.seatClass == seatClass){
+                            $('#SeatNumber').append('<option value="' + seat.seatID + '">' + seat.seatNumber + '</option>');
+                        }
+                    });
+                }
+            })
+        });
+
+        $('#app').on('click', '.delete-btn', function () {
+            if (confirm('Do you want to delete this data?')) {
+                var bookingId = $(this).data('id');
+                $.ajax({
+                    url: '/api/Bookings/deleteBooking/' + bookingId,
+                    method: 'DELETE',
+                    data: {
+                        id: bookingId
+                    },
+                    success: function (data) {
+                        alert(data.message);
+                        refreshTable();
+                    }
+                })
+            }
+            else {
+            }
+        });
+
+        $('#app').on('click', '.detail-btn', function () {
+            $('#addBookingModal').modal('show');
+            var bookingId = $(this).data('id');
+            var seatClass = $(this).data('seat-id');
+            $('#saveBookingBtn').hide();
+            $('#closeBookingBtn').hide();
+
+            $.ajax({
+                url: '/api/Bookings/GetBooking',
+                method: 'GET',
+                data: {
+                    id: bookingId
+                },
+                success: function (data) {
+                    booking = data.data;
+                    $('#SeatNumber').empty();
+
+                    booking[0].flights.seats.forEach(function (seat) {
+                        $('#SeatNumber').append('<option value="' + seat.seatID + '">' + seat.seatNumber + '</option>');
+                    });
+                    const bookingsHtml = booking.map(booking => `
+                        <div class="form-group row">
+                            <label for="FullName" class="col-md-3 col-form-label">Tên khách hàng</label>
+                            <div class="col-md-9">
+                                <input type="text" id="FullName" name="FullName" class="form-control" value="${booking.passengers.fullName}" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="FlightNumber" class="col-md-3 col-form-label">Số hiệu máy bay</label>
+                            <div class="col-md-9">
+                                <input type="text" id="FlightNumber" name="FlightNumber" class="form-control" value="${booking.flights.flightNumber}"/>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="BookingDate" class="col-md-3 col-form-label">Ngày đặt vé</label>
+                            <div class="col-md-9">
+                                <input type="text" id="BookingDate" name="BookingDate" class="form-control" value="${booking.bookingDate}"/>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="BookingStatus" class="col-md-3 col-form-label">Trạng thái đặt chỗ</label>
+                            <div class="col-md-9">
+                                <input type="text" id="BookingStatus" name="BookingStatus" class="form-control" value="${booking.bookingStatus == "true" ? 'Chưa thanh toán' : 'đã thanh toán'}"/>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="TotalPrice" class="col-md-3 col-form-label">Tổng tiền</label>
+                            <div class="col-md-9">
+                                <input type="text" id="TotalPrice" name="TotalPrice" class="form-control" value="${booking.totalPrice}"/>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="PaymentMethod" class="col-md-3 col-form-label">Trạng thái thanh toán</label>
+                            <div class="col-md-9">
+                                <input type="text" id="PaymentMethod" name="PaymentMethod" class="form-control" value="${booking.payments.paymentMethod == "true" ? 'Chưa thanh toán' : 'đã thanh toán'}"/>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Verivication" class="col-md-3 col-form-label">Mã Xác Nhận</label>
+                            <div class="col-md-9">
+                                <input type="text" id="Verivication" name="Verivication" class="form-control" value="${booking.verification}"/>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                    `).join('');
+                    $('#booking').html(bookingsHtml);
+                }
+            })
+        });
+
+        $('#saveBookingBtn').click(function (e) {
+            var data = {
+                SeatId: $('#SeatNumber').val(),
+            };
+            var bookingId = currentBookingId;
+            $.ajax({
+                url: '/api/Bookings/updateBooking/' + bookingId,
+                method: 'PUT',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    alert(data.message);
+                    resetInputs();
+                    $('#addBookingModal').modal('hide');
+                    refreshTable();
+                }
+            });
+            currentBookingId = '';
+        });
+    });
+</script>

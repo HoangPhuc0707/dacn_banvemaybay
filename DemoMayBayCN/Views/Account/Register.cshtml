@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link href="~/css/main.css" rel="stylesheet" />
+    <title>HASH TECHIE OFFICIAL</title>
+</head>
+<body>
+    <section>
+        <div id="Register" class="form-box" style="height: 650px;">
+            <div class="form-value">
+                <form class="form-horizontal" role="form" v-on:submit.prevent="Register">
+                    <h2>Đăng ký</h2>
+                    <div class="inputbox">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="text" name="UserName" required="required" v-model="RegisterRequest.UserName">
+                        <label for="UserName">UserName</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="key-outline"></ion-icon>
+                        <input type="password" name="Password" required="required" v-model="RegisterRequest.Password">
+                        <label for="Password">Password</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="text" name="Email" required="required" v-model="RegisterRequest.Email">
+                        <label for="Email">Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="text" name="Fullname" required="required" v-model="RegisterRequest.FullName">
+                        <label for="Fullname">Fullname</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="text" name="Gender" required="required" v-model="RegisterRequest.Gender">
+                        <label for="Gender">Gender</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="call-outline"></ion-icon>
+                        <input type="text" name="PhoneNumber" required="required" v-model="RegisterRequest.PhoneNumber">
+                        <label for="PhoneNumber">Phone Number</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="home-outline"></ion-icon>
+                        <input type="text" name="Address" required="required" v-model="RegisterRequest.Address">
+                        <label for="Address">Address</label>
+                    </div>
+                    <div v-if="errorMessage" class="text-danger">{{ errorMessage }}</div>
+                   
+                    <button type="submit" style="margin-top: 50px">Register</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
+<script>
+    Vue.config.ignoredElements = [/^ion-/]
+    var app = new Vue({
+        el: '#Register',
+        data: {
+            RegisterRequest: {
+                UserName: '',
+                Email: '',
+                Password: '',
+                FullName:'',
+                Address:'',
+                PhoneNumber:'',
+                Gender:'',
+            },
+            errorMessage: '',
+        },
+        methods: {
+            Register() {
+                axios.post('/api/Authmanagerment/Register', this.RegisterRequest)
+                    .then((response)=>{
+                        window.location.href = "@Url.Action("Index", "Flights")";
+                    })
+                    .catch((error) =>{
+                        console.error(error.response.data);
+                        app.errorMessage = JSON.stringify(error.response.data.errors)
+                            .replace(/^\[|\]$/g, '')
+                            .replace(/"/g, '');
+                    });
+            },
+
+        },
+        mounted: function () {
+        }
+    });
+</script>

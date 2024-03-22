@@ -1,0 +1,358 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div id="content_wrapper">
+    <!--page title Start-->
+    <div class="page_title" data-stellar-background-ratio="0" data-stellar-vertical-offset="0" style="background-image: url(/images/bg/page_title_bg.jpg);">
+        <ul>
+            <li><a href="javascript:;">Gói Đặt Vé</a></li>
+        </ul>
+    </div>
+    <!--page title end-->
+    <div class="clearfix"></div>
+    <div class="full_width destinaion_sorting_section">
+        <div class="container">
+            <div class="row space_100">
+                <!-- left sidebar start -->
+                <!-- left sidebar end -->
+                <!-- right main start -->
+                <div class="col-lg-12">
+                    <div class="tour_package_booking_section">
+                        <!-- package tabs start -->
+                        <div id="seat_flight" class="main_content_area hotel_main_content">
+                            <!--  tab inner section three Start -->
+                            <div class="inner_container">
+                                <form class="package_booking_main">
+                                    <div class="tab_inner_section inner_section_2 flight_inner_section">
+                                        <div class="tab_inner_body full_width">
+                                            <!-- package_booking_form start -->
+                                            <div class="package_booking_form">
+                                                <div id="app" class="plane2">
+                                                </div>
+                                                <div id="app1" class="plane2">
+                                                </div>
+                                            </div>
+                                            <!--  package_booking_form END -->
+                                        </div>
+                                        <!--  tab_inner_body end -->
+                                    </div>
+                                    <!--  tab inner three section End -->
+                                    <!-- proceed button -->
+                                    <div class="full_width t_align_c">
+                                        <button type="submit" value="proceed to next step" class="btn_green proceed_buttton btns">Tiếp theo</button>
+                                    </div>
+
+                                    <!-- proceed button -->
+                                </form>
+
+                            </div>
+                            <!--  inner container end -->
+                        </div>
+                        <!-- package tabs End -->
+                    </div>
+                    <!-- right main start -->
+                </div>
+                <!-- col-lg-9-end -->
+            </div>
+            <!--  row main -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- main wrapper -->
+</div>
+<script>
+    var searchParams = new URLSearchParams(window.location.search);
+    var flightId = searchParams.get('flightId');
+    var flightId1 = searchParams.get('flightId1');
+    var typeTicket = searchParams.get('typeTicket');
+    var songuoidi = searchParams.get('availableSeats');
+    var departureCode = searchParams.get('departureCode');
+    var arriveCode = searchParams.get('arriveCode');
+    var arrivalDay = searchParams.get('arrivalDay');
+    var departureDay = searchParams.get('departureDay');
+    var availableSeats = searchParams.get('availableSeats');
+    var seatType = localStorage.getItem("seatType");
+    var seatType1 = localStorage.getItem("seatType1");
+    $(document).ready(function () {
+        //localStorage.removeItem("seatType");
+        $.ajax({
+            url: '/api/CheckOut/SeatsDiagram',
+            method: 'GET',
+            data: {
+                flightId: flightId
+            },
+            success: function (data) {
+                console.log(data.data);
+                var seats = data.data;
+                var rows = [];
+
+                // Chia dữ liệu ghế thành các hàng
+                for (var i = 0; i < seats.length; i += 6) {
+                    var rowSeats = seats.slice(i, i + 6);
+                    rows.push(rowSeats); 
+                }
+
+                const seatHtml = `
+                <div class="plane">
+                    <div class="cockpit">
+                        <h1>Hãy chọn chỗ chuyến bay đi bạn mong muốn ngồi</h1>
+                    </div>
+                    <div class="exit exit--front fuselage"></div>
+                    <ol class="cabin fuselage">
+                        ${rows.map(row => `
+                            <li class="row row--1">
+                                <ol class="seats" type="A">
+                                    ${row.map(seat => `
+                                        <li class="seat">
+                                            <input name="sohieughe" value="${seat.seatNumber}" type="checkbox" id="${seat.seatNumber}" ${seat.seatAvailable == 1 ? 'checked="checked" disabled="disabled"' : ''} ${seat.seatClass == "Thương Gia" ? 'name="ThuongGia"' : 'name="PhoThong"'} ${seatType === 'phothong' && seat.seatClass === 'Thương Gia' ? 'disabled="disabled"' : ''} ${seatType === 'thuonggia' && seat.seatClass === 'Phổ Thông' ? 'disabled="disabled"' : ''} />
+                                            <label for="${seat.seatNumber}" ${seat.seatClass == "Thương Gia" ? 'name="Thuong Gia"' : 'name="Pho Thong"'}>${seat.seatNumber} </label>
+                                        </li>`).join('')}
+                                </ol>
+                            </li>`).join('')}
+                    </ol>
+                    <div class="exit exit--back fuselage">
+                    </div>
+                </div>
+                <div class="plane1">
+                    <h3 style="text-align:center">Loại Ghế</h3>
+                    <ol class="seats1" type="A">
+                        <li class="seat">
+                            <input type="checkbox" id="1A" disabled="disabled" />
+                            <label for="1A" style="width:20%;margin-left:10px;margin-right:10px;background:blue">1A</label>
+                            <h4 style="font-weight: bold;">Ghế thượng hạng</h4>
+                        </li>
+
+                    </ol>
+
+                    <ol class="seats1" type="A">
+                        <li class="seat">
+                            <input type="checkbox" id="1A" disabled="disabled" />
+                            <label for="1A" style="width:20%;margin-left:10px;margin-right:10px">1A</label>
+                            <h4 style="font-weight: bold;">Ghế phổ thông</h4>
+                        </li>
+                    </ol>
+                        <ol class="seats1" type="A">
+                        <li class="seat">
+                            <input type="checkbox"  id="1A" disabled="disabled" />
+                            <label for="1A" style="width:20%;margin-left:10px;margin-right:10px;background:#bada55">1A</label>
+                            <h4 style="font-weight: bold;">Ghế đang chọn</h4>
+                        </li>
+                    </ol>
+                    <ol class="seats1" type="A">
+                        <li class="seat">
+                            <input type="checkbox" checked="checked" id="1A" disabled="disabled" />
+                            <label for="1A" style="width:20%;margin-left:10px;margin-right:10px">1A</label>
+                            <h4 style="font-weight: bold;">Ghế đã đặt</h4>
+                        </li>
+                    </ol>
+                </div>`;
+                // Cập nhật nội dung của #app với dữ liệu ghế mới đã được chia thành từng hàng
+                $('#app').html(seatHtml);
+            },
+        });
+        if (flightId1) {
+           $.ajax({
+                url: '/api/CheckOut/SeatsDiagram',
+                method: 'GET',
+                data: {
+                    flightId: flightId1
+                },
+                success: function (data) {
+                    console.log(data.data);
+                    var seats = data.data;
+                    var rows = [];
+
+                    // Chia dữ liệu ghế thành các hàng
+                    for (var i = 0; i < seats.length; i += 6) {
+                        var rowSeats = seats.slice(i, i + 6);
+                        rows.push(rowSeats); 
+                    }
+
+                    const seatHtml = `
+                    <div class="plane">
+                        <div class="cockpit">
+                            <h1>Hãy chọn chỗ chuyến bay về bạn mong muốn ngồi</h1>
+                        </div>
+                        <div class="exit exit--front fuselage"></div>
+                        <ol class="cabin fuselage">
+                            ${rows.map(row => `
+                                <li class="row row--1">
+                                    <ol class="seats" type="A">
+                                        ${row.map(seat => `
+                                            <li class="seat">
+                                                <input name="sohieugheve" value="${seat.seatNumber}" type="checkbox" id="checkbox - ${seat.seatNumber}" ${seat.seatAvailable == 1 ? 'checked="checked" disabled="disabled"' : ''} ${seat.seatClass == "Thương Gia" ? 'name="ThuongGia"' : 'name="PhoThong"'} ${seatType1 === 'phothong' && seat.seatClass === 'Thương Gia' ? 'disabled="disabled"' : ''} ${seatType1 === 'thuonggia' && seat.seatClass === 'Phổ Thông' ? 'disabled="disabled"' : ''} />
+                                                <label for="checkbox - ${seat.seatNumber}" ${seat.seatClass == "Thương Gia" ? 'name="Thuong Gia"' : 'name="Pho Thong"'}>${seat.seatNumber} </label>
+                                            </li>`).join('')}
+                                    </ol>
+                                </li>`).join('')}
+                        </ol>
+                        <div class="exit exit--back fuselage">
+                        </div>
+                    </div>
+                    <div class="plane1">
+                        <h3 style="text-align:center">Loại Ghế</h3>
+                        <ol class="seats1" type="A">
+                            <li class="seat">
+                                <input type="checkbox" id="1A" disabled="disabled" />
+                                <label for="1A" style="width:20%;margin-left:10px;margin-right:10px;background:blue">1A</label>
+                                <h4 style="font-weight: bold;">Ghế thượng hạng</h4>
+                            </li>
+
+                        </ol>
+
+                        <ol class="seats1" type="A">
+                            <li class="seat">
+                                <input type="checkbox" id="1A" disabled="disabled" />
+                                <label for="1A" style="width:20%;margin-left:10px;margin-right:10px">1A</label>
+                                <h4 style="font-weight: bold;">Ghế phổ thông</h4>
+                            </li>
+                        </ol>
+                            <ol class="seats1" type="A">
+                            <li class="seat">
+                                <input type="checkbox"  id="1A" disabled="disabled" />
+                                <label for="1A" style="width:20%;margin-left:10px;margin-right:10px;background:#bada55">1A</label>
+                                <h4 style="font-weight: bold;">Ghế đang chọn</h4>
+                            </li>
+                        </ol>
+                        <ol class="seats1" type="A">
+                            <li class="seat">
+                                <input type="checkbox" checked="checked" id="1A" disabled="disabled" />
+                                <label for="1A" style="width:20%;margin-left:10px;margin-right:10px">1A</label>
+                                <h4 style="font-weight: bold;">Ghế đã đặt</h4>
+                            </li>
+                        </ol>
+                    </div>`;
+                    // Cập nhật nội dung của #app với dữ liệu ghế mới đã được chia thành từng hàng
+                    $('#app1').html(seatHtml);
+                },
+            });
+        }
+    });
+    $(document).on('change', "input[name='sohieughe']", function () {
+        // Đếm số ghế đang được chọn trên toàn bộ trang
+        var soGheDaChon = $("input[name='sohieughe']:checked:not(:disabled)").length;
+
+        // So sánh với số người đi
+        if (soGheDaChon > songuoidi) {
+            // Nếu số lượng ghế được chọn vượt quá số người đi, hủy chọn ghế đó
+            $(this).prop("checked", false);
+            alert("Bạn đã chọn số lượng ghế vượt quá số lượng người bạn chọn đi");
+            setTimeout(function () {
+                $(this).prop("checked", false);
+            }, 1);
+        }
+    });
+    $(document).on('change', "input[name='sohieugheve']", function () {
+        // Đếm số ghế đang được chọn trên toàn bộ trang
+        var soGheDaChon = $("input[name='sohieugheve']:checked:not(:disabled)").length;
+
+        // So sánh với số người đi
+        if (soGheDaChon > songuoidi) {
+            // Nếu số lượng ghế được chọn vượt quá số người đi, hủy chọn ghế đó
+            $(this).prop("checked", false);
+            alert("Bạn đã chọn số lượng ghế vượt quá số lượng người bạn chọn đi");
+        }
+    });
+    $(document).on('click', '.proceed_buttton', function (e) {
+        e.preventDefault();
+        // Đếm số ghế đang được chọn trên toàn bộ trang
+        var soGheDaChon = $("input[name='sohieughe']:checked:not(:disabled)").length;
+        var soGheDaChon1 = $("input[name='sohieugheve']:checked:not(:disabled)").length;
+        if (soGheDaChon != songuoidi) {
+            // Nếu số lượng ghế được chọn vượt quá số người đi, hủy chọn ghế đó
+            /*  $(this).prop("checked", false);*/
+            alert("Bạn chưa chọn đủ số lượng ghế với số lượng người bạn chọn đi");
+            return false;
+        }
+        if(flightId1){
+            if (soGheDaChon1 != songuoidi) {
+                // Nếu số lượng ghế được chọn vượt quá số người đi, hủy chọn ghế đó
+                /*  $(this).prop("checked", false);*/
+                alert("Bạn chưa chọn đủ số lượng ghế với số lượng người bạn chọn đi");
+                return false;
+            }
+        }
+        //var seatNumber = $("input[name='sohieughe']:checked:not(:disabled)").val();
+
+        var selectedSeats = $("input[name='sohieughe']:checked:not(:disabled)")
+            .map(function () {
+                return this.value;
+            })
+            .get();
+        var selectedSeatsReturn = $("input[name='sohieugheve']:checked:not(:disabled)")
+            .map(function () {
+                return this.value;
+            })
+            .get();
+
+        $.ajax({
+            url: '/api/CheckOut/SeatSelection',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ FlightId: flightId, seatNumbers: selectedSeats}),
+            success: function (data) {
+                console.log(data.seatSelection);
+                if (typeTicket == "one-way") {
+                    window.location.href = '/CheckOut/Passengers?typeTicket=' + 'one-way' + '&departureCode=' + departureCode + '&arriveCode=' + arriveCode + '&departureDay=' + departureDay + '&arrivalDay=' + arrivalDay + '&availableSeats=' + availableSeats + '&flightId=' + flightId;
+
+                }
+                if (typeTicket == "round-trip") {
+                    if (flightId1) {
+                        $.ajax({
+                            url: '/api/CheckOut/SeatReturnSelection',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({ FlightId: flightId1, seatNumbers: selectedSeatsReturn }),
+                            success: function (data) {
+                                console.log(data.seatReturnSelection);
+                                    window.location.href = '/CheckOut/Passengers?typeTicket=' + 'round-trip' + '&departureCode=' + departureCode + '&arriveCode=' + arriveCode + '&departureDay=' + departureDay + '&arrivalDay=' + arrivalDay + '&availableSeats=' + availableSeats + '&flightId=' + flightId;
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                if (xhr.status === 409) {
+                                    var errorData = JSON.parse(xhr.responseText);
+                                    alert(errorData.message);
+                                } else {
+                                    console.error('There was a problem with the Ajax request:', errorThrown);
+                                }
+                            }
+                        })
+                    }
+                    return false;
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 409) {
+                    var errorData = JSON.parse(xhr.responseText);
+                    alert(errorData.message);
+                } else {
+                    console.error('There was a problem with the Ajax request:', errorThrown);
+                }
+            }
+        })
+        //if (flightId1) {
+        //    $.ajax({
+        //        url: '/api/CheckOut/SeatReturnSelection',
+        //        method: 'POST',
+        //        contentType: 'application/json',
+        //        data: JSON.stringify({ FlightId: flightId1, seatNumbers: selectedSeatsReturn }),
+        //        success: function (data) {
+        //            console.log(data.seatReturnSelection);
+        //            if (typeTicket == "one-way") {
+        //                window.location.href = '/CheckOut/Passengers?typeTicket=' + 'one-way' + '&departureCode=' + departureCode + '&arriveCode=' + arriveCode + '&departureDay=' + departureDay + '&arrivalDay=' + arrivalDay + '&availableSeats=' + availableSeats + '&flightId=' + flightId;
+
+        //            }
+        //            if (typeTicket == "round-trip") {
+        //                window.location.href = '/CheckOut/Passengers?typeTicket=' + 'round-trip' + '&departureCode=' + departureCode + '&arriveCode=' + arriveCode + '&departureDay=' + departureDay + '&arrivalDay=' + arrivalDay + '&availableSeats=' + availableSeats + '&flightId=' + flightId;
+        //            }
+        //        },
+        //    })
+        //}
+
+        
+        //return false;
+    });
+    
+</script>

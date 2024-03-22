@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<!--
+  Template Name: Travelite - Tours and Travels Online Booking HTML
+  Version: 1.0.0
+  -->
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js">
+  <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js">
+  <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<!-- Mirrored from kamleshyadav.com/html/travelite/html/bootstrap3/travelite-default/Flight-Home.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Apr 2023 11:48:17 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <title>Travelite - Tours and Travels Online Booking HTML</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Travelite - Tours and Travels Online Booking HTML" />
+    <meta name="keywords" content="Travel, html template, Travelite template">
+    <meta name="author" content="Kamleshyadav" />
+    <meta name="MobileOptimized" content="320">
+    <!--srart theme style -->
+    <link href="~/css/main.css" rel="stylesheet" type="text/css" />
+    <!-- end theme style -->
+    <!-- favicon links -->
+    <link rel="shortcut icon" type="image/ico" href="~/favicon.ico" />
+    <link rel="icon" type="image/ico" href="~/favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-cookies@1.5.12/vue-cookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('.searchTicket').click(function (e){
+                window.location.href = '/CheckOut/SearchTicket';
+
+            });
+        });
+    </script>
+</head>
+<body class="travel_home">
+    <header id="header_wrapper">
+        <div class="header_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header_bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <div class="travel_logo">
+                            <a href="Home_01.html">
+                                <img src="~/svg/Logo.svg" alt="logo" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                        <a href="javascript:;" class="menu-toggle"></a>
+                        <div class="main_menu">
+                            <ul>
+                                <li class="active">
+                                    <a href="#">@Html.ActionLink("Trang Chủ", "Index", "Flights")</a>
+                                </li>
+                                <li><a href="tin-tuc/">tin tức khuyến mãi</a></li>
+                                <li><a href="~/tin-tuc/ve-noi-dia">tin tức nội địa</a></li>
+                                <li><a href="~/tin-tuc/ve-quoc-te">tin tức nước ngoài</a></li>
+                                <li><a href="Contact.html">liên hệ</a></li>
+                                <li class="searchTicket"><a>Tra cứu vé máy bay</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!--Header end-->
+    <!--content body start-->
+    @RenderBody()
+    <div id="content_wrapper">
+
+        <footer class="footer">
+            <div id="logo_skytrax_wap">
+                <div id="logo-skytrax-wap">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="logo-skytrax-img">
+                                <img src="https://www.vietnamairlines.com/~/media/Images/VNANew/Footer/4-Star_Metallic_150x150.png?la=vi-VN" alt=" Vietnam Airlines is proud to be leading 4-star global airline " />
+                            </div>
+                            <!--logo-skytrax-->
+                            <div class="logo-skytrax-txt">
+                                <h4 style="margin-top: 5px;">Travelite tự hào là Hãng hàng không quốc tế 4 sao</h4>
+                                <p style="margin-bottom: 5px;">Xin trân trọng cảm ơn sự đồng hành của Quý khách và bạn hàng!</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container-wrapper">
+
+                <nav class="navbar navbar-footer">
+                    <ul id="footer_0_contentfooter_0_navFooter" class="nav navbar-nav five-columns">
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-list-type="Footer" data-content-type="Navigation" data-content-title="Vietnam Airlines" data-content-id="/vn/vi/vietnam-airlines" href="/vn/vi/vietnam-airlines">
+                                <h4>
+                                    Travelite
+                                </h4>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Giới Thiệu Công Ty" data-content-id="/vn/vi/vietnam-airlines/about-us" href="/vn/vi/vietnam-airlines/about-us">Giới Thiệu C&#244;ng Ty</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Đội Bay" data-content-id="/vn/vi/vietnam-airlines/our-fleets" href="/vn/vi/vietnam-airlines/our-fleets">Đội Bay</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Đối Tác" data-content-id="/vn/vi/vietnam-airlines/subsidiaries-partners" href="/vn/vi/vietnam-airlines/subsidiaries-partners">Đối T&#225;c</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Thông Tin Truyền Thông" data-content-id="/vn/vi/vietnam-airlines/press-room" href="/vn/vi/vietnam-airlines/press-room">Th&#244;ng Tin Truyền Th&#244;ng</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Trách nhiệm xã hội" data-content-id="/vn/vi/vietnam-airlines/trach-nhiem-xa-hoi" href="/vn/vi/vietnam-airlines/trach-nhiem-xa-hoi">Tr&#225;ch nhiệm x&#227; hội</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Quan Hệ Cổ Đông" data-content-id="/vn/vi/vietnam-airlines/investor-relations" href="/vn/vi/vietnam-airlines/investor-relations">Quan Hệ Cổ Đ&#244;ng</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Thông Tin Đấu Thầu" data-content-id="/vn/vi/vietnam-airlines/procurement" href="/vn/vi/vietnam-airlines/procurement">Th&#244;ng Tin Đấu Thầu</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Cẩm nang mua vé online" data-content-id="/vn/vi/vietnam-airlines/tutorial" href="/vn/vi/vietnam-airlines/tutorial">Cẩm nang mua v&#233; online</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Việc Làm với Vietnam Airlines" data-content-id="/vn/vi/vietnam-airlines/career-with-us" href="/vn/vi/vietnam-airlines/career-with-us">Việc L&#224;m với Travelite</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-list-type="Footer" data-content-type="Navigation" data-content-title="Pháp lý" data-content-id="/vn/vi/legal" href="/vn/vi/legal">
+                                <h4>
+                                    Ph&#225;p l&#253;
+                                </h4>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Các Điều Kiện &amp; Điều Khoản" data-content-id="/vn/vi/legal/terms-and-conditions" href="/vn/vi/legal/terms-and-conditions">C&#225;c Điều Kiện &amp; Điều Khoản</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Điều Lệ Vận Chuyển " data-content-id="/vn/vi/legal/conditions-of-carriage" href="/vn/vi/legal/conditions-of-carriage">Điều Lệ Vận Chuyển </a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Điều Kiện Sử Dụng Cookies" data-content-id="/vn/vi/legal/cookies-policy" href="/vn/vi/legal/cookies-policy">Điều Kiện Sử Dụng Cookies</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Bảo Mật Thông Tin" data-content-id="/vn/vi/legal/privacy-policy" href="/vn/vi/legal/privacy-policy">Bảo Mật Th&#244;ng Tin</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Quy Chế Hoạt Động Sàn TMĐT" data-content-id="/vn/vi/legal/quy-che-hoat-dong-san-tmdt" href="/vn/vi/legal/quy-che-hoat-dong-san-tmdt">Quy Chế Hoạt Động S&#224;n TMĐT</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-list-type="Footer" data-content-type="Navigation" data-content-title="Hỗ Trợ" data-content-id="/vn/vi/support" href="/vn/vi/support">
+                                <h4>
+                                    Hỗ Trợ
+                                </h4>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Góp ý dịch vụ" data-content-id="/vn/vi/support/claim-suggestion" href="/vn/vi/support/claim-suggestion">G&#243;p &#253; dịch vụ</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Trung tâm Trợ giúp" data-content-id="/vn/vi/support/customer-care" href="/vn/vi/support/customer-care">Trung t&#226;m Trợ gi&#250;p</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Chính Sách Bảo Vệ Hành Khách" data-content-id="/vn/vi/support/customer-service-plan" href="/vn/vi/support/customer-service-plan">Ch&#237;nh S&#225;ch Bảo Vệ H&#224;nh Kh&#225;ch</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Trợ lý ảo của vietnam airlines" data-content-id="/vn/vi/support/chatbot" href="/vn/vi/support/chatbot">Trợ l&#253; ảo của Travelite</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-list-type="Footer" data-content-type="Navigation" data-content-title="Vận Tải Hàng Hóa" data-content-id="/vn/vi/cargo-services" href="/vn/vi/cargo-services">
+                                <h4>
+                                    Vận Tải H&#224;ng H&#243;a
+                                </h4>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Trang Web Hàng Hoá" data-content-id="/vn/vi/cargo-services/cargo-website" href="/vn/vi/cargo-services/cargo-website">Trang Web H&#224;ng Ho&#225;</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-list-type="Footer" data-content-type="Navigation" data-content-title="Thông Tin Hữu Ích" data-content-id="/vn/vi/useful-information" href="/vn/vi/useful-information">
+                                <h4>
+                                    Th&#244;ng Tin Hữu &#205;ch
+                                </h4>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Cẩm nang mua vé online" data-content-id="/vn/vi/useful-information/huong-dan" href="/vn/vi/useful-information/huong-dan">Cẩm nang mua v&#233; online</a>
+                                </li>
+
+                                <li>
+                                    <a data-list-type="Footer" data-content-type="Navigation" data-content-title="Quảng cáo với Vietnam Airlines" data-content-id="/vn/vi/useful-information/advertise-with-us" href="/vn/vi/useful-information/advertise-with-us">Quảng c&#225;o với Travelite</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <div>
+                        &nbsp;
+                    </div>
+                </nav>
+                <!--footer-row-->
+            </div>
+            <!--container-wrapper-->
+        </footer>
+        <!--footer end-->
+    </div>
+    <!--Page main section end-->
+    <!--main js file start-->
+    <script type="text/javascript" src="~/js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="~/js/plugin/datetimepicker/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="~/js/plugin/parallax/jquery.parallax-1.1.3.js" ></script>
+    <script type="text/javascript" src="~/js/plugin/owl/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/js/plugin/isotope/jquery.isotope.js"></script>
+    <script type="text/javascript" src="~/js/plugin/bxslider/jquery-bxslider.js"></script>
+    <!-- pie chart js -->
+    <script type="text/javascript" src="~/js/plugin/pie-circle/circles.js"></script>
+    <!-- pie chart js -->
+    <!--counter js-->
+    <script type="text/javascript" src="~/js/plugin/counter/jquery.countTo.js"></script>
+    <!--counter js-->
+    <script type="text/javascript" src="~/js/plugin/counter/jquery.countdown.js"></script>
+    <!-- REVOLUTION JS FILES -->
+    <script type="text/javascript" src="~/js/plugin/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="~/js/plugin/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="~/js/plugin/revolution/js/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="~/js/plugin/revolution/js/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="~/js/plugin/revolution/js/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="~/js/plugin/revolution/js/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="~/js/plugin/revolution/js/revolution.extension.parallax.min.js"></script>
+    <!-- REVOLUTION JS FiLES -->
+    <!-- video_popup -->
+    <script type="text/javascript" src="~/js/plugin/video-popup/jquery.magnific-popup.js"></script>
+    <!-- video_popup -->
+    <!-- slick slider -->
+    <script type="text/javascript" src="~/js/plugin/slick/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="~/js/plugin/slick/slick.min.js"></script>
+    <!-- slick slider -->
+    <!-- video player js -->
+    <script src="~/js/plugin/video_player/mediaelement-and-player.min.js"></script>
+    <!-- video player js -->
+    <!-- pricefilter -->
+    <script src="~/js/plugin/jquery-ui/jquery-ui.js"></script>
+    <!-- pricefilter-->
+    <script type="text/javascript" src="~/js/custom.js"></script>
+    <!--main js file end-->
+    @RenderSection("scripts", required: false)
+</body>
+
+<!-- Mirrored from kamleshyadav.com/html/travelite/html/bootstrap3/travelite-default/Flight-Home.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Apr 2023 11:48:37 GMT -->
+</html>

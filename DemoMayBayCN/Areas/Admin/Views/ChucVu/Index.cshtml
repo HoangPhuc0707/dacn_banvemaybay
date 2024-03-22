@@ -1,0 +1,182 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<div class="card card-title bg-white p-1">
+    <div class="row">
+        <div class="col-md-6 "> <h5 class="pl-2 mt-2 text-blues">Quản lý chức vụ </h5> </div>
+        <div class="col-md-6 m-0">
+        </div>
+    </div>
+</div>
+<div class="search-container">
+    <label for="SearchString" style="margin-right: 10px">Tìm tên chức vụ : </label>
+    <input type="text" id="searchInput" placeholder="Nhập tên chức vụ">
+    <input type="submit" value="Tìm kiếm" id="search-button">
+</div>
+
+<button class="btn btn-primary add"><i class="fas fa-plus"></i>Thêm chức vụ</button>
+<div id="app"></div>
+
+<div class="modal" id="addRoleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bảng thông tin quyền</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Đặt nội dung của form thêm thành phố ở đây -->
+                <form id="addCityForm">
+                    <div class="form-group row" id="RoleId1">
+                        <label for="UserName" class="col-md-3 col-form-label">Id</label>
+                        <div class="col-md-9">
+                            <input type="text" id="RoleId" name="RoleId" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="FlightNumber1">
+                        <label for="UserName" class="col-md-3 col-form-label">Tên quyền</label>
+                        <div class="col-md-9">
+                            <input type="text" id="RoleName" name="RoleName" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeRoleBtn" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="saveRoleBtn">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getRole() {
+        $.ajax({
+            url: '/api/Users/GettAllRoles',
+            method: "GET",
+            success: function (data) {
+                renderTable(data.data);
+            }
+        });
+    }
+    function renderTable(roles) {
+        const tableHeader = `
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                `;
+        const rolesHtml = roles.map(role => `
+                    <tr>
+                        <td>${role.id}</td>
+                        <td>${role.name}</td>
+                        <td>
+                            <button data-id="${role.id}" class="edit-btn btn btn-primary" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button data-id="${role.id}" class="delete-btn btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+        const tableHtml = `<table class="table table-striped" id="tblBrands">${tableHeader}${rolesHtml}</table>`;
+        $('#app').html(tableHtml);
+    }
+    $('.close, .btn-secondary').click(function (e) {
+        $('#addUserModal').modal('hide')
+    });
+    $(document).ready(function () {
+        getRole();
+        var currentAction = '';
+        var currentRoleId = '';
+
+        function resetInputs() {
+            $('input[type="text"]').each(function () {
+                $(this).val('');
+            });
+        }
+
+        $('.add').click(function (e) {
+            $('#addRoleModal').modal('show');
+            $('#RoleId1').hide();
+            resetInputs();
+            currentAction = 'add';
+        });
+
+        $('.close, .btn-secondary').click(function (e) {
+            $('#addRoleModal').modal('hide')
+        });
+
+        $('#app').on('click', '.edit-btn', function () {
+            $('#addRoleModal').modal('show');
+            $('#RoleId').prop("readOnly", true);
+            var roleId = $(this).data('id');
+            currentRoleId = roleId;
+            $.ajax({
+                url: '/api/Users/GetRoles',
+                method: 'GET',
+                data: {
+                    id: roleId
+                },
+                success: function (data) {
+                    role = data.data;
+                    $('#RoleId').val(role.id);
+                    $('#RoleName').val(role.name);
+                }
+            })
+            currentAction = 'edit';
+        });
+
+        $('#app').on('click', '.delete-btn', function () {
+            if (confirm('Do you want to delete this data?')) {
+                var userId = $(this).data('id');
+                $.ajax({
+                    url: '/api/Users/RemoveRole/' + userId,
+                    method: 'DELETE',
+                    data: {
+                        id: userId
+                    },
+                    success: function (data) {
+                        alert(data.result);
+                        getRole();
+                    }
+                })
+            }
+            else {
+            }
+        });
+
+        $('#saveRoleBtn').click(function (e) {
+            var roleName = $('#RoleName').val();
+            if (currentAction === 'add') {
+                $.ajax({
+                    url: '/api/Users/CreateRole',
+                    method: 'POST',
+                    contentType: "application/json", 
+                    data: JSON.stringify({ RoleName: roleName }),
+                    success: function (data) {
+                        alert(data.result);
+                        resetInputs();
+                        $('#addRoleModal').modal('hide');
+                        getRole();
+                    }
+                });
+            } else if (currentAction === 'edit') {
+                var RoleId = currentRoleId;
+                $.ajax({
+                    url: '/api/Users/EditRole/' + RoleId,
+                    method: 'PUT',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ RoleName: roleName }),
+                    success: function (data) {
+                        alert(data.result);
+                        resetInputs();
+                        $('#addRoleModal').modal('hide');
+                        getRole();
+                    }
+                });
+            }
+            currentAction = '';
+            currentAirportId = '';
+        });
+    })
+</script>

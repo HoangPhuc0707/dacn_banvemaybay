@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<div id="content_wrapper">
+    <!--page title Start-->
+    <div class="page_title" data-stellar-background-ratio="0" data-stellar-vertical-offset="0" style="background-image:url(/images/bg/page_title_bg.jpg);">
+        <ul>
+            <li><a href="javascript:;">Chuyến bay chiều đi</a></li>
+        </ul>
+    </div>
+    <!--page title end-->
+    <div class="clearfix"></div>
+    <div class="full_width destinaion_sorting_section">
+        <div class="container">
+            <div class="row space_100" style="padding-top:0px">
+                <!-- right main start -->
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                    <div class="tour_packages_right_section left_space_40">
+                        <!-- sorting places section -->
+                        <form>
+                            @* <input type="hidden" name="songuoi" value="" />*@
+                            <div id="app" class="full_width hotel_list_sorting" style="width: 130%">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- right main start -->
+                </div>
+            </div>
+        </div>
+    </div><!--content body end-->
+</div>
+<script>
+    // Thu thập các giá trị từ form
+    var searchParams = new URLSearchParams(window.location.search);
+    var departureCode = searchParams.get('departureCode');
+    var arriveCode = searchParams.get('arriveCode');
+    var departureDay = searchParams.get('departureDay');
+    var arrivalDay = searchParams.get('arrivalDay');
+    var availableSeats = searchParams.get('availableSeats');
+
+    $(document).ready(function () {
+        $.formattedDate = function (dateToFormat) {
+            var dateObject = new Date(dateToFormat);
+            var day = dateObject.getDate();
+            var month = dateObject.getMonth() + 1;
+            var year = dateObject.getFullYear();
+            day = day < 10 ? "0" + day : day;
+            month = month < 10 ? "0" + month : month;
+            var formattedDate = day + "/" + month + "/" + year;
+            return formattedDate;
+        };
+
+        // Thực hiện cuộc gọi AJAX
+        $.ajax({
+            url: '/api/Flights/FlightSearch', // Điều chỉnh URL theo đúng địa chỉ của phương thức trong controller của bạn
+            method: 'GET',
+            data: {
+                departureCode: departureCode,
+                arriveCode: arriveCode,
+                departureDay: departureDay,
+                availableSeats: availableSeats
+            },
+            success: function (data) {
+                console.log(data.data);
+                var flights = data.data;
+                const flightHtml = flights.map(flight => `
+                    <input type="hidden" name="songuoi" value="" />
+                        <!--sort_list start -->
+                        <div class="sorting_places_wrap  list_sorting_view">
+                            <div class="col-lg-5 col-md-5 col-sm-5 padding_none">
+                                <div class="thumb_wrape">
+                                    <a href="#">
+                                        <img src="/images/flights/${flight.hinhAnh}" alt="hotel thumb">
+                                        <div class="overlay_title">
+                                            <h4>Hãng bay</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7">
+                                <!-- Desc -->
+                                <div class="flight_grid_desc flight_list_desc">
+                                    <!-- title start -->
+                                    <div class="bottom_title">
+                                        <div class="diadiem" style="width:260px">
+                                                <h5><a href="#"></a>${flight.airports1.city}</h5>
+                                        </div>
+                                        <div class="diadiem" style="width:30px">
+                                            <i class="fa fa-plane"></i>
+                                        </div>
+                                        <div class="diadiem" style="width:190px">
+                                                <h5><a href="#"></a>${flight.airports.city}</h5>
+                                        </div>
+                                        <!-- review End -->
+                                    </div>
+                                    <!-- title End -->
+                                    <!-- flight schedule -->
+                                    <div class="total_time_schedule">Hiệu máy bay: ${flight.flightNumber}</span></div>
+                                    <div class="total_time_schedule">Số lượng ghế: ${flight.availableSeats}</div>
+                                    <div class="flight_details_schedule">
+                                        <div class="take_off_landing">
+                                            <h5>Cất Cánh</h5>
+                                            <p>${$.formattedDate(flight.departureDay)} at ${flight.departureTime}</p>
+                                        </div>
+                                        <div class="take_off_landing">
+                                            <h5>Hạ Cánh</h5>
+                                            <p>${$.formattedDate(flight.departureDay)} at ${flight.arrivalTime}</p>
+                                        </div>
+                                    </div>
+                                    <!-- flight schedule -->
+
+                                    <div class="list_button">
+                                            <button type="submit" name="phothong" value="${flight.flightID}"  class="btns" id="datve-button">
+                                                <h5>${flight.fares.filter(fare => fare.fareType === 'Phổ Thông').map(fare => fare.fareType)}</h5>
+                                                    <h5 class="doller">${flight.fares.filter(fare => fare.fareType === 'Phổ Thông').map(fare => fare.fareAmount)} VNĐ</h5>
+                                            </button>
+                                            <button type="submit" name="thuonggia" value="${flight.flightID}"  class="btns" id="datve-button">
+                                                <h5>${flight.fares.filter(fare => fare.fareType === 'Thương Gia').map(fare => fare.fareType)}</h5>
+                                                <h5 class="doller">${flight.fares.filter(fare => fare.fareType === 'Thương Gia').map(fare => fare.fareAmount)} VNĐ</h5>
+                                            </button>
+                                    </div>
+                                </div><!--  Desc End -->
+                            </div>
+                        </div>
+
+                `).join('');
+
+                // Cập nhật nội dung của #content_wrapper với dữ liệu mới
+                $('#app').html(flightHtml);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+        $(document).on('click', '#datve-button', function (e) {
+            e.preventDefault();
+            var flightId = $(this).val();
+            var seatType = $(this).attr('name');
+            $.ajax({
+                url: '/api/CheckOut/FlightSelection',
+                method: 'GET',
+                data: {
+                    flightId: flightId
+                },
+                success: function (data) {
+                    console.log(data.data);
+                    fightSelection = data.data;
+                }
+            })
+            localStorage.setItem("seatType", seatType);
+            window.location.href = '/Flights/FlightSearchReturn?typeTicket=' + 'round-trip' + '&departureCode=' + departureCode + '&arriveCode=' + arriveCode + '&departureDay=' + departureDay + '&arrivalDay=' + arrivalDay + '&availableSeats=' + availableSeats + '&flightId=' + flightId;
+            //return false;
+        });
+    });
+    
+</script>

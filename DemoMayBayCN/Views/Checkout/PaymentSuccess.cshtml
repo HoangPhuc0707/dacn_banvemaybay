@@ -1,0 +1,464 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<body>
+    <!--page title Start-->
+    <div class="page_title" data-stellar-background-ratio="0" data-stellar-vertical-offset="0" style="background-image:url(/images/bg/page_title_bg.jpg);">
+        <ul>
+            <li><a href="javascript:;">Xác nhận thông tin chuyến bay đã đặt</a></li>
+        </ul>
+    </div>
+    <!--page title end-->
+    <!-- confirmation Start -->
+    <div id="confirmation" class="main_content_area hotel_main_content">
+        <div class="inner_container">
+            <!-- confirmation message -->
+            <div class="full_width confirmation_msg"> <span>CẢM ƠN. ĐẶT CHỖ CỦA BẠN ĐÃ ĐƯỢC XÁC NHẬN NGAY BÂY GIỜ</span> </div>
+            <!-- confirmation message End-->
+            <!--  tab inner section two Start -->
+            <div class="tab_inner_section flight_inner_section">
+                <div class="heading_tab_inner">
+                    <h5>Thông tin chi tiết vé máy bay</h5>
+                </div>
+                <div id="flight"></div>
+                <div id="flight1"></div>
+                <div class="full_width total_price_row">
+                    <p>Tổng tiền - </p>
+                    <h2>TongTien VNĐ</h2>
+                </div>
+                    @*<div class="tab_inner_body full_width">
+                        <div class="flight_review_area full_width">
+                            <div class="col-lg-10 col-md-9">
+                                <!--  review area start -->
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4"> <img src="~/Content/images/flights/ChuyenBay.HinhAnh" alt="review image"> </div>
+                                    <div class="col-lg-8 col-md-8">
+                                        <div class="review_content">
+                                            <div class="top_head_bar">
+                                                <h4>.ChuyenBay.ThanhPho1.TenThanhPho đến .ChuyenBay.ThanhPho.TenThanhPho</h4>
+                                               
+                                            </div>
+                                            <div class="review_star_cover">
+                                               
+                                                {
+                                                    <span style="font-size: 14px">Chỗ ngồi chiều đi:GheDi</span>
+                                                }
+                                                
+                                                {
+                                                    <span style="font-size: 14px">Chỗ ngồi chiều về: GheVe</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--  review area end -->
+                                </div>
+                                <!-- row -->
+                            </div>
+                            <!--  col-lg-9 -->
+
+                            <div class="right_includes_flight col-lg-2 col-md-3">
+                                <div class="doller_left">
+                                    <h2></h2>
+                                    <p>/Người</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab include area Start -->
+
+                        <div class="inludes_section flight_schedule_section">
+                            <span class="emirates_button btn-yellow">Chiều đi</span>
+                            <div class="main_section_flight">
+                                <div class="country_section_box">
+                                    <p>Thời gian bay: .ChuyenBay.GioKhoiHanh</p>
+                                    <h4>.ChuyenBay.ThanhPho1.TenThanhPho</h4>
+                                    <p class="shedule_d">.ChuyenBay.NgayKhoiHanh.ToString("dd/MM/yyyy")</p>
+                                </div>
+                                <div class="middle_flight_section">
+                                    <h5>Tổng thời gian</h5>
+                                    <p> <i class="fa fa-clock-o"></i>   .ChuyenBay.TongThoiGian</p>
+                                </div>
+                                <div class="country_section_box">
+                                    <p>Thời gian đến:.ChuyenBay.GioDen</p>
+                                    <h4>.ChuyenBay.ThanhPho.TenThanhPho</h4>
+                                    <p class="shedule_d">.ChuyenBay.NgayKhoiHanh.ToString("dd/MM/yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab include area End -->
+                    </div>*@
+                
+                <!--  tab inner body  End-->
+            </div>
+            <!-- tab inner section end -->
+            <!-- information_section start -->
+            @*<div class="full_width information_section">
+               
+                    <div class="information_title"> Thông tin khách hàng </div>
+                    <div class="full_width information_table_main">
+
+                        <div class="col-lg-6 col-md-6 border_right">
+
+                            <div class="payment_table_package">
+                                <table class="table">
+                                    <tr>
+                                        <td>Họ và tên : </td>
+                                        <td>TenKH</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Giới tính : </td>
+                                        <td>.GioiTinh</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày sinh :</td>
+                                        <td>.NgaySinh.ToString("dd/MM/yyyy")</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--  Payment Table End -->
+                        </div>
+                        <div class="col-lg-6 col-md-6 border_right">
+                            <div class="payment_table_package">
+                                <table class="table">
+                                    <tr>
+                                        <td>Email :</td>
+                                        <td>.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số điện thoại :</td>
+                                        <td>.SDT</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Địa chỉ :</td>
+                                        <td>.DiaChi</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--  Payment Table End -->
+                        </div>
+
+                        <!-- information_table End -->
+                    </div>
+                
+                <div class="full_width total_price_row">
+                    <p>Tổng tiền - </p>
+                    <h2>TongTien VNĐ</h2>
+                </div>
+                <!-- information_section End -->
+            </div>*@
+            <!-- information_section End -->
+        </div>
+        <!--  inner container -->
+    </div>
+    <!-- confirmation End -->
+</body>
+<script>
+    $(document).ready(function(){
+        var searchParams = new URLSearchParams(window.location.search);
+        var typeTicket = searchParams.get('typeTicket');
+        var tripType = typeTicket === 'round-trip' ? 'Khứ hồi' : 'Một chiều';
+        var seatType = localStorage.getItem("seatType");
+        var seat = seatType == 'phothong' ? 'Phổ Thông' : 'Thương Gia'
+        var seatType1 = localStorage.getItem("seatType1");
+        var seat1 = seatType1 == 'thuonggia' ? 'Thương Gia' : 'Phổ Thông';
+        var totalOutboundPrice = 0;
+        var totalReturnPrice = 0;
+        $.formattedDate = function (dateToFormat) {
+            var dateObject = new Date(dateToFormat);
+            var day = dateObject.getDate();
+            var month = dateObject.getMonth() + 1;
+            var year = dateObject.getFullYear();
+            day = day < 10 ? "0" + day : day;
+            month = month < 10 ? "0" + month : month;
+            var formattedDate = day + "/" + month + "/" + year;
+            return formattedDate;
+        };
+        $.calculateFlightDuration = function (departureTime, arrivalTime) {
+            var departureDate = new Date('1970-01-01 ' + departureTime);
+            var arrivalDate = new Date('1970-01-01 ' + arrivalTime);
+
+            // Lấy thời gian ở đơn vị mili giây
+            var durationInMillis = arrivalDate - departureDate;
+
+            // Chuyển đổi thành giờ:phút:giây
+            var hours = Math.floor(durationInMillis / (60 * 60 * 1000));
+            var minutes = Math.floor((durationInMillis % (60 * 60 * 1000)) / (60 * 1000));
+
+            // Trả về chuỗi thời gian
+            return hours + ' giờ ' + minutes + ' phút';
+        };
+        $.ajax({
+            url: '/api/CheckOut/TicketInformation', // Điều chỉnh URL theo đúng địa chỉ của phương thức trong controller của bạn
+            method: 'GET',
+
+            success: function (data) {
+                console.log(data.flightSelection);
+                console.log(data.seatSelection);
+                console.log(data.passengersSelection);
+
+                var flightSelection = data.flightSelection;
+                var seatSelection = data.seatSelection;
+                var passengerSelection = data.passengersSelection;
+                var departureDateTime = new Date(flightSelection.departureTime);
+                var arrivalDateTime = new Date(flightSelection.arrivalTime);
+                const flightHtml = flightSelection.map(flight => {
+
+                    const seatInfoHtml = seatSelection.filter(seat => seat.flightId === flight.id).map((selectedSeatInfo, seatIndex) => {
+                        return `
+                                <span style="font-size: 14px">Chỗ ngồi ${seatIndex + 1}: ${selectedSeatInfo.seatNumber}</span>
+                            `;
+                    }).join('');
+
+                    totalOutboundPrice += parseFloat(flight.fares.filter(fare => fare.fareType === seat).map(fare => fare.fareAmount)) * parseInt((data.passengersSelection).length);
+
+                    const passengerInfoHtml = passengerSelection.map((passenger, index) => {
+                        return `
+                            <div class="information_title"> Thông tin khách hàng ${index + 1} </div>
+                            <div class="full_width information_table_main">
+                                <div class="col-lg-6 col-md-6 border_right">
+                                    <div class="payment_table_package">
+                                        <table class="table">
+                                            <tr>
+                                                <td>Họ và tên : </td>
+                                                <td>${passenger.fullName}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Giới tính : </td>
+                                                <td>${passenger.gender}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ngày sinh :</td>
+                                                <td>${passenger.ngaySinh}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--  Payment Table End -->
+                                </div>
+                                <div class="col-lg-6 col-md-6 border_right">
+                                    <div class="payment_table_package">
+                                        <table class="table">
+                                            <tr>
+                                                <td>Email :</td>
+                                                <td>${passenger.email}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Số điện thoại :</td>
+                                                <td>${passenger.phone}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Địa chỉ :</td>
+                                                <td>${passenger.address}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!--  Payment Table End -->
+                                </div>
+                                <!-- information_table End -->
+                            </div>
+                            `;
+                    }).join('');
+
+                    return `
+                        <div class="tab_inner_body full_width">
+                            <div class="flight_review_area full_width">
+                                <div class="col-lg-10 col-md-9">
+                                    <!--  review area start -->
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4"> <img src="/images/flights/${flight.hinhAnh}" alt="review image"> </div>
+                                        <div class="col-lg-8 col-md-8">
+                                            <div class="review_content">
+                                                <div class="top_head_bar">
+                                                    <h4>${flight.airports1.city} đến ${flight.airports.city}</h4>
+                                                </div>
+                                                <div class="review_star_cover">
+                                                     ${seatInfoHtml}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  review area end -->
+                                    </div>
+                                    <!-- row -->
+                                </div>
+                                <!--  col-lg-9 -->
+
+                                <div class="right_includes_flight col-lg-2 col-md-3">
+                                    <div class="doller_left">
+                                        <h2>${flight.fares.filter(fare => fare.fareType === seat).map(fare => fare.fareAmount)}</h2>
+                                        <p>/Người</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- tab include area Start -->
+                            <div class="inludes_section flight_schedule_section">
+                                <span class="emirates_button btn-yellow">Chiều đi</span>
+                                <div class="main_section_flight">
+                                    <div class="country_section_box">
+                                        <p>Thời gian bay:${flight.departureTime}</p>
+                                        <h4>${flight.airports1.city}</h4>
+                                        <p class="shedule_d">${$.formattedDate(flight.departureDay)}</p>
+                                    </div>
+                                    <div class="middle_flight_section">
+                                        <h5>Tổng thời gian</h5>
+                                        <p> <i class="fa fa-clock-o"></i>${$.calculateFlightDuration(flight.departureTime, flight.arrivalTime)}</p>
+                                    </div>
+                                    <div class="country_section_box">
+                                        <p>Thời gian đến:${flight.arrivalTime}</p>
+                                        <h4>${flight.airports.city}</h4>
+                                        <p class="shedule_d">${$.formattedDate(flight.departureDay)}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- tab include area End -->
+                        </div>
+                        <div class="full_width information_section">
+                            ${passengerInfoHtml}
+                            
+                        </div>
+                    `;
+                }).join('');
+
+                // Cập nhật nội dung của #content_wrapper với dữ liệu mới
+                $('#flight').html(flightHtml);
+                $('.total_price_row h2').text(totalOutboundPrice);
+
+            }
+        });
+        if (typeTicket == "round-trip") {
+            $.ajax({
+                url: '/api/CheckOut/TicketReturnInformation', // Điều chỉnh URL theo đúng địa chỉ của phương thức trong controller của bạn
+                method: 'GET',
+
+                success: function (data) {
+                    console.log(data.flightReturnSelection);
+                    console.log(data.seatReturnSelection);
+                    console.log(data.passengersSelection);
+
+                    var flightSelection = data.flightReturnSelection;
+                    var seatSelection = data.seatReturnSelection;
+                    var passengerSelection = data.passengersSelection;
+                    var departureDateTime = new Date(flightSelection.departureTime);
+                    var arrivalDateTime = new Date(flightSelection.arrivalTime);
+                    const flightHtml = flightSelection.map(flight => {
+
+                        const seatInfoHtml = seatSelection.filter(seat => seat.flightId === flight.id).map((selectedSeatInfo, seatIndex) => {
+                            return `
+                                    <span style="font-size: 14px">Chỗ ngồi ${seatIndex + 1}: ${selectedSeatInfo.seatNumber}</span>
+                                `;
+                        }).join('');
+
+                        totalOutboundPrice += parseFloat(flight.fares.filter(fare => fare.fareType === seat).map(fare => fare.fareAmount)) * parseInt((data.passengersSelection).length);
+
+                        const passengerInfoHtml = passengerSelection.map((passenger, index) => {
+                            return `
+                                <div class="information_title"> Thông tin khách hàng ${index + 1} </div>
+                                <div class="full_width information_table_main">
+                                    <div class="col-lg-6 col-md-6 border_right">
+                                        <div class="payment_table_package">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>Họ và tên : </td>
+                                                    <td>${passenger.fullName}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Giới tính : </td>
+                                                    <td>${passenger.gender}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày sinh :</td>
+                                                    <td>${passenger.ngaySinh}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!--  Payment Table End -->
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 border_right">
+                                        <div class="payment_table_package">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>Email :</td>
+                                                    <td>${passenger.email}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Số điện thoại :</td>
+                                                    <td>${passenger.phone}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Địa chỉ :</td>
+                                                    <td>${passenger.address}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!--  Payment Table End -->
+                                    </div>
+                                    <!-- information_table End -->
+                                </div>
+                                `;
+                        }).join('');
+
+                        return `
+                            <div class="tab_inner_body full_width">
+                                <div class="flight_review_area full_width">
+                                    <div class="col-lg-10 col-md-9">
+                                        <!--  review area start -->
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4"> <img src="/images/flights/${flight.hinhAnh}" alt="review image"> </div>
+                                            <div class="col-lg-8 col-md-8">
+                                                <div class="review_content">
+                                                    <div class="top_head_bar">
+                                                        <h4>${flight.airports1.city} đến ${flight.airports.city}</h4>
+                                                    </div>
+                                                    <div class="review_star_cover">
+                                                         ${seatInfoHtml}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--  review area end -->
+                                        </div>
+                                        <!-- row -->
+                                    </div>
+                                    <!--  col-lg-9 -->
+
+                                    <div class="right_includes_flight col-lg-2 col-md-3">
+                                        <div class="doller_left">
+                                            <h2>${flight.fares.filter(fare => fare.fareType === seat).map(fare => fare.fareAmount)}</h2>
+                                            <p>/Người</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- tab include area Start -->
+
+                                <div class="inludes_section flight_schedule_section">
+                                    <span class="emirates_button btn-yellow">Chiều đi</span>
+                                    <div class="main_section_flight">
+                                        <div class="country_section_box">
+                                            <p>Thời gian bay:${flight.departureTime}</p>
+                                            <h4>${flight.airports1.city}</h4>
+                                            <p class="shedule_d">${$.formattedDate(flight.departureDay)}</p>
+                                        </div>
+                                        <div class="middle_flight_section">
+                                            <h5>Tổng thời gian</h5>
+                                            <p> <i class="fa fa-clock-o"></i>${$.calculateFlightDuration(flight.departureTime, flight.arrivalTime)}</p>
+                                        </div>
+                                        <div class="country_section_box">
+                                            <p>Thời gian đến:${flight.arrivalTime}</p>
+                                            <h4>${flight.airports.city}</h4>
+                                            <p class="shedule_d">${$.formattedDate(flight.departureDay)}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- tab include area End -->
+                            </div>
+                            <div class="full_width information_section">
+                                ${passengerInfoHtml}
+                                
+                            </div>
+                        `;
+                    }).join('');
+
+                    // Cập nhật nội dung của #content_wrapper với dữ liệu mới
+                    $('#flight1').html(flightHtml);
+                    $('.total_price_row h2').text((totalOutboundPrice + totalReturnPrice));
+
+                }
+            });
+        }
+    })
+</script>

@@ -1,0 +1,360 @@
+﻿<style>
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+    }
+
+        .search-container input[type=text] {
+            width: 60%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-container input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .search-container input[type=submit]:hover {
+                background-color: #45a049;
+            }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div id="content_wrapper">
+
+    <div class="page_title" data-stellar-background-ratio="0" data-stellar-vertical-offset="0" style="background-image: url(/images/bg/page_title_bg.jpg);">
+        <ul>
+            <li><a href="javascript:;">Tra cứu vé chuyến bay đã đặt</a></li>
+        </ul>
+    </div>
+</div>
+<div class="search-container">
+    <label for="SearchString" style="margin-right: 10px">Tìm vé chuyến bay đã đặt: </label>
+    <input type="text" id="searchInput" placeholder="Nhập mã xác nhận của vé">
+    <input type="submit" value="Tìm kiếm" id="search-button">
+</div>
+<div id="flightreturn"></div>
+
+
+<script>
+    //$(document).ready(function () {
+    //    $('#search-button').click(function (e) {
+    //        console.log('Submit event triggered');
+    //        e.preventDefault();
+    //        var searchString = $('#searchInput').val();
+
+    //        // Sử dụng XMLHttpRequest để gửi yêu cầu
+    //        var xhr = new XMLHttpRequest();
+    //        xhr.open("GET", "/api/CheckOut/searchTicket?searchString=" + encodeURIComponent(searchString), true);
+    //        xhr.responseType = "json";
+
+    //        xhr.onload = function () {
+    //            if (xhr.status === 200) {
+    //                // Nếu yêu cầu thành công, xử lý kết quả
+    //                var data = xhr.response;
+    //                console.log(data.searchTicket);
+    //                var searchTicket = data.searchTicket;
+    //                const flightHtml = searchTicket.map(flight => {
+    //                    return `
+    //                        <div class="flight_review_area full_width">
+    //                            <div class="col-lg-10 col-md-9">
+    //                                <div class="row">
+    //                                    <div class="col-lg-4 col-md-4"> <img src="" alt="review image"> </div>
+    //                                    <div class="col-lg-8 col-md-8">
+    //                                        <div class="review_content">
+    //                                            <div class="top_head_bar">
+    //                                                <h4> đến </h4>
+    //                                                <span class="country_span"></span>
+    //                                            </div>
+    //                                        </div>
+    //                                    </div>
+    //                                </div>
+    //                            </div>
+    //                            <div class="right_includes_flight col-lg-2 col-md-3">
+    //                                <div class="doller_left">
+    //                                    <h2></h2>
+    //                                    <p>/Người</p>
+    //                                </div>
+    //                            </div>
+    //                        </div>
+    //                        <div class="inludes_section flight_schedule_section">
+    //                            <span class="emirates_button btn-yellow">Chiều về</span>
+    //                            <div class="main_section_flight">
+    //                                <div class="country_section_box">
+    //                                    <p>Thời gian bay:</p>
+    //                                    <h4> </h4>
+    //                                    <p class="shedule_d"></p>
+    //                                </div>
+    //                                <div class="middle_flight_section">
+    //                                    <h5>Tổng thời gian</h5>
+    //                                    <p> <i class="fa fa-clock-o"></i> </p>
+    //                                </div>
+    //                                <div class="country_section_box">
+    //                                    <p>Thời gian đến:</p>
+    //                                    <h4></h4>
+    //                                    <p class="shedule_d"></p>
+    //                                </div>
+    //                            </div>
+    //                        </div>
+    //                    `;
+    //                }).join('');
+
+    //                // Cập nhật nội dung của #flightreturn
+    //                $('#flightreturn').html(flightHtml);
+    //            } else {
+    //                // Nếu yêu cầu thất bại, hiển thị thông báo lỗi
+    //                document.getElementById("searchResults").innerHTML = "An error occurred.";
+    //            }
+    //        };
+
+    //        xhr.send();
+    //    });
+    //});
+
+    //$(document).ready(function () {
+    //    $('#search-button').click(function (e) {
+    //        console.log('Submit event triggered');
+    //        e.preventDefault();
+    //        var searchString = $('#searchInput').val();
+
+    //        $.ajax({
+    //            url: "/api/CheckOut/searchTicket",
+    //            method: "GET",
+    //            data: {
+    //                searchString: searchString,
+    //            },
+    //            dataType: "json",
+    //            success: function (data) {
+    //                console.log(data.searchTicket);
+    //                var searchTicket = data.searchTicket;
+    //                const flightHtml = searchTicket.map(flight => {
+    //                    return `
+    //                        <div class="flight_review_area full_width">
+    //                            <div class="col-lg-10 col-md-9">
+    //                                <div class="row">
+    //                                    <div class="col-lg-4 col-md-4"> <img src="" alt="review image"> </div>
+    //                                    <div class="col-lg-8 col-md-8">
+    //                                        <div class="review_content">
+    //                                            <div class="top_head_bar">
+    //                                                <h4> đến </h4>
+    //                                                <span class="country_span"></span>
+    //                                            </div>
+    //                                        </div>
+    //                                    </div>
+    //                                </div>
+    //                            </div>
+    //                            <div class="right_includes_flight col-lg-2 col-md-3">
+    //                                <div class="doller_left">
+    //                                    <h2></h2>
+    //                                    <p>/Người</p>
+    //                                </div>
+    //                            </div>
+    //                        </div>
+    //                        <div class="inludes_section flight_schedule_section">
+    //                            <span class="emirates_button btn-yellow">Chiều về</span>
+    //                            <div class="main_section_flight">
+    //                                <div class="country_section_box">
+    //                                    <p>Thời gian bay:</p>
+    //                                    <h4> </h4>
+    //                                    <p class="shedule_d"></p>
+    //                                </div>
+    //                                <div class="middle_flight_section">
+    //                                    <h5>Tổng thời gian</h5>
+    //                                    <p> <i class="fa fa-clock-o"></i> </p>
+    //                                </div>
+    //                                <div class="country_section_box">
+    //                                    <p>Thời gian đến:</p>
+    //                                    <h4></h4>
+    //                                    <p class="shedule_d"></p>
+    //                                </div>
+    //                            </div>
+    //                        </div>
+    //                    `;
+    //                }).join('');
+
+    //                 Cập nhật nội dung của #flightreturn
+    //                $('#flightreturn').html(flightHtml);
+    //            },
+    //            error: function () {
+    //                 Nếu có lỗi, hiển thị thông báo lỗi
+    //                $('#flightreturn').html("An error occurred.");
+    //            }
+    //        });
+    //    });
+    //});
+
+    $(document).ready(function () {
+        $.formattedDate = function (dateToFormat) {
+            var dateObject = new Date(dateToFormat);
+            var day = dateObject.getDate();
+            var month = dateObject.getMonth() + 1;
+            var year = dateObject.getFullYear();
+            day = day < 10 ? "0" + day : day;
+            month = month < 10 ? "0" + month : month;
+            var formattedDate = day + "/" + month + "/" + year;
+            return formattedDate;
+        };
+        $.calculateFlightDuration = function (departureTime, arrivalTime) {
+            var departureDate = new Date('1970-01-01 ' + departureTime);
+            var arrivalDate = new Date('1970-01-01 ' + arrivalTime);
+
+            // Lấy thời gian ở đơn vị mili giây
+            var durationInMillis = arrivalDate - departureDate;
+
+            // Chuyển đổi thành giờ:phút:giây
+            var hours = Math.floor(durationInMillis / (60 * 60 * 1000));
+            var minutes = Math.floor((durationInMillis % (60 * 60 * 1000)) / (60 * 1000));
+
+            // Trả về chuỗi thời gian
+            return hours + ' giờ ' + minutes + ' phút';
+        };
+        $('#search-button').click(function (e) {
+            console.log('Submit event triggered');
+            e.preventDefault();
+            var searchString = $('#searchInput').val();
+            $.ajax({
+                url: '/api/CheckOut/searchTicket', // Điều chỉnh URL theo đúng địa chỉ của phương thức trong controller của vbạn
+                method: 'GET',
+                data:{
+                    searchString: searchString,
+                },
+               
+                success: function (data) {
+                    console.log(data.searchTicket);
+                    var searchTicket = data.searchTicket;
+                    const flightHtml = searchTicket.map(flight => {
+                        return `
+                            <div class="clearfix"></div>
+                            <div class="full_width destinaion_sorting_section">
+                                <div class="container">
+                                    <div class="row space_100">
+                                        <!-- right main start -->
+                                        <div class="col-lg-12">
+                                            <div class="tour_package_booking_section">
+                                                <!-- package tabs start -->
+                                                <div id="booking_details" class="main_content_area hotel_main_content">
+                                                    <div class="inner_container">
+                                                        <!--  tab inner section two Start -->
+                                                            <div class="tab_inner_section flight_inner_section">
+                                                                <div class="heading_tab_inner">
+                                                                    <h5>Thông tin chi tiết vé máy bay</h5>
+                                                                </div>
+                                                                <div class="tab_inner_body full_width">
+
+                                                                    <div class="flight_review_area full_width">
+                                                                        <div class="col-lg-10 col-md-9">
+                                                                            <!--  review area start -->
+                                                                            <div class="row">
+                                                                                <div class="col-lg-4 col-md-4"> <img src="/images/flights/${flight.flights.hinhAnh}" alt="review image"> </div>
+                                                                                <div class="col-lg-8 col-md-8">
+                                                                                    <div class="review_content">
+                                                                                        <div class="top_head_bar">
+                                                                                            <h4>${flight.flights.airports1.city} đến ${flight.flights.airports.city}</h4>
+                                                                                        </div>
+                                                                                        <div class="review_star_cover">
+                                                                                            <span style="font-size: 14px">Chỗ ngồi chiều đi: ${flight.seats.seatNumber}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--  review area end -->
+                                                                            </div>
+                                                                            <!-- row -->
+                                                                        </div>
+                                                                        <!--  col-lg-9 -->
+
+                                                                    </div>
+                                                                    <!-- tab include area Start -->
+
+                                                                    <div class="inludes_section flight_schedule_section">
+                                                                        <span class="emirates_button btn-yellow">Chiều đi</span>
+                                                                        <div class="main_section_flight">
+                                                                            <div class="country_section_box">
+                                                                                <p>Thời gian bay:${flight.flights.departureTime}</p>
+                                                                                <h4>${flight.flights.airports1.city}</h4>
+                                                                                <p class="shedule_d">${$.formattedDate(flight.flights.departureDay)}</p>
+                                                                            </div>
+                                                                            <div class="middle_flight_section">
+                                                                                <h5>Tổng thời gian</h5>
+                                                                                <p> <i class="fa fa-clock-o"></i> ${$.calculateFlightDuration(flight.flights.departureTime, flight.flights.arrivalTime)}</p>
+                                                                            </div>
+                                                                            <div class="country_section_box">
+                                                                                <p>Thời gian đến:${flight.flights.arrivalTime}</p>
+                                                                                <h4>${flight.flights.airports.city}</h4>
+                                                                                <p class="shedule_d">${$.formattedDate(flight.flights.departureDay)}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="inludes_section">
+                                                                        <div class="flight_details_table full_width">
+                                                                            <div class="table_heding_title">Thông tin khách hàng </div>
+                                                                            <div class="hotel_airlines_list">
+                                                                                <div class="airline_detail_list">
+                                                                                    <fieldset>
+                                                                                        <ul>
+                                                                                            <li> <span>Họ Tên</span><span>-</span><span>${flight.passengers.fullName}</span> </li>
+                                                                                            <li> <span>Giới Tính</span><span>-</span><span>${flight.passengers.gender}</span> </li>
+                                                                                            <li> <span>Ngày Sinh</span><span>-</span><span>${$.formattedDate(flight.passengers.ngaySinh)}</span> </li>
+                                                                                        </ul>
+                                                                                    </fieldset>
+                                                                                </div>
+                                                                                <div class="airline_detail_list table_bold">
+                                                                                    <fieldset>
+                                                                                        <ul>
+                                                                                            <li> <span>Email</span><span>-</span><span>${flight.passengers.email}</span> </li>
+                                                                                            <li> <span>Số điện thoại</span><span>-</span><span>${flight.passengers.phone}</span>  </li>
+                                                                                            <li> <span>Địa chỉ</span><span>-</span><span>${flight.passengers.address}</span> </li>
+                                                                                        </ul>
+                                                                                    </fieldset>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- tab include area End -->
+                                                                </div>
+                                                                <!--  tab inner body  End-->
+
+                                                            </div>
+                                                           
+                                                        <!-- tab inner section end -->
+                                                    </div>
+                                                    <!--  inner_container -->
+                                                </div>
+                                                <!-- booking_details End -->
+                                            </div>
+                                            <!-- right main start -->
+                                        </div>
+                                        <!-- col-lg-9-end -->
+                                    </div>
+                                    <!--  row main -->
+                                </div>
+                                <!-- container -->
+                            </div>
+                            <!-- main wrapper -->
+                        `;
+                    }).join('');
+
+                    // Cập nhật nội dung của #content_wrapper với dữ liệu mới
+                    $('#flightreturn').html(flightHtml);
+
+                }
+            });
+        });
+    });
+</script>
+

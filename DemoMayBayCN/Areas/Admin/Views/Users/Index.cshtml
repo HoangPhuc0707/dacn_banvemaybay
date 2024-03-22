@@ -1,0 +1,135 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<div class="card card-title bg-white p-1">
+    <div class="row">
+        <div class="col-md-6 "> <h5 class="pl-2 mt-2 text-blues">Quản lý tài khoản </h5> </div>
+        <div class="col-md-6 m-0">
+        </div>
+    </div>
+</div>
+
+<div class="search-container">
+    <label for="SearchString" style="margin-right: 10px">Tìm tên tài khoản : </label>
+    <input type="text" id="searchInput" placeholder="Nhập tên tài khoản">
+    <input type="submit" value="Tìm kiếm" id="search-button">
+</div>
+<div class="modal" id="addUserModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bảng thông tin người dùng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Đặt nội dung của form thêm thành phố ở đây -->
+                <form id="addCityForm">
+                    <div class="form-group row" id="FlightNumber1">
+                        <label for="UserName" class="col-md-3 col-form-label">Tên đăng nhập</label>
+                        <div class="col-md-9">
+                            <input type="text" id="UserName" name="UserName" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ArrivalCity" class="col-md-3 col-form-label">Chức vụ</label>
+                        <div class="col-md-9">
+                            @*<input type="text" id="ArrivalCity" name="ArrivalCity" class="form-control" />*@
+                            <select class="form-control" id="Roles" name="Roles">
+                            </select>
+                            <span id="ArrivalCityError" class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeUserBtn" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="saveUserBtn">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="app"></div>
+<script>
+    function getUser() {
+        $.ajax({
+            url: '/api/Users/GettAllUsers',
+            method: "GET",
+            success: function (data) {
+                renderTable(data.data);
+            }
+        });
+    }
+    function renderTable(users) {
+        const tableHeader = `
+                <tr>
+                    <th>UserName</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            `;
+        const usersHtml = users.map(user => `
+                <tr>
+                    <td>${user.fullName}</td>
+                    <td>${user.roles}</td>
+                    <td>
+                        <button data-id="${user.id}" class="edit-btn btn btn-primary" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        const tableHtml = `<table class="table table-striped" id="tblBrands">${tableHeader}${usersHtml}</table>`;
+        $('#app').html(tableHtml);
+    }
+    $('.close, .btn-secondary').click(function (e) {
+        $('#addUserModal').modal('hide')
+    });
+    $(document).ready(function () {
+        getUser();
+        var currentUserId = '';
+        $('#app').on('click', '.edit-btn', function () {
+            $('#addUserModal').modal('show');
+            $("#UserName").prop("readOnly", true);
+            $('#Roles').empty();
+            var userId = $(this).data('id');
+            currentUserId = userId;
+            $.ajax({
+                url: '/api/Users/GetUser',
+                method: 'GET',
+                data: {
+                    id: userId
+                },
+                success: function (data) {
+                    user = data.data;
+                    $('#UserName').val(user);
+                }
+            });
+            $.ajax({
+                url: '/api/Users/GettAllRoles',
+                method: 'GET',
+                success: function (data) {
+                    roles = data.data;
+                    roles.forEach(function (roles) {
+                        $('#Roles').append('<option value="' + roles.id + '">' + roles.name + '</option>');
+                    });
+                }
+            })
+        });
+        $('#saveUserBtn').click(function (e) {
+            var data = {
+                roleId: $('#Roles').val(),
+            }
+            var UserId = currentUserId;
+            $.ajax({
+                url: '/api/Users/EditRoleName/' + UserId,
+                method: 'PUT',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    alert(data.message);
+                    $('#addUserModal').modal('hide');
+                }
+            });
+            currentUserId = '';
+        });
+    })
+</script>

@@ -1,0 +1,912 @@
+/*
+Copyright (c) 2016
+------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:	Travelite - Tours and Travels Online Booking HTML
+Version:	1.0.0
+Assigned to:	Themeforest
+-------------------------------------------------------------------*/
+@import url("travelite-style.css");
+
+@import url("woocommerce.css");
+@import url("responsive.css");
+@import url("fonts.css");
+@import url("bootstrap.css");
+@import url("bootstrap-theme.css");
+@import url("font-awesome.css");
+@import url("animate.css");
+
+@import url("bootstrap-select.css");
+@import url("jquery.datetimepicker.css");
+
+	
+/*Default css start*/
+@import url("default/blog.css");
+@import url("default/call-to-action.css");
+@import url("default/footer.css");
+@import url("default/header.css");
+@import url("default/portfolio.css");
+@import url("default/widget.css");
+@import url("default/typography.css");
+@import url("default/content-section.css");
+@import url("default/rtl.css");
+@import url("default/customer-says.css");
+@import url("default/services.css");
+@import url("default/margin-padding.css");
+@import url("default/about.css");
+@import url("default/contact_page.css");
+@import url("default/event.css");
+@import url("default/login-signup.css");
+@import url("default/404.css");
+@import url("default/comming-soon.css");
+/*Default css end*/
+
+
+/*Plugin css start*/
+@import url("../js/plugin/owl/owl.carousel.css");
+@import url("../js/plugin/owl/owl.theme.css"); 
+@import url("../js/plugin/bxslider/jquery.bxslider.css");
+@import url("../js/plugin/revolution/css/layers.css");
+@import url("../js/plugin/revolution/css/settings.css");
+@import url("../js/plugin/video-popup/magnific-popup.css");
+@import url("../js/plugin/slick/slick.css");
+@import url("../js/plugin/slick/slick-theme.css");
+@import url("../js/plugin/video_player/css/mediaelementplayer.min.css");
+@import url("../js/plugin/jquery-ui/jquery-ui.css");
+/*Plugin css end*/
+
+
+/* @import url("travelite_dark.css"); */ 
+
+
+/* Color css start */
+/* @import url("color/color1.css"); */
+/* Color css end */
+/*@import url("animate.css");
+@import url("normalize.css");
+@import url("bootstrap.min.css");
+@import url("jquery-ui.min.css");
+@import url("style-typography.css");
+@import url("selectBox.css");*/
+
+html, body {
+	overflow-x: hidden
+}
+
+#logo-skytrax-wap {
+	/*background-image: url("../images/other/pattern_vang.svg");*/
+	background-repeat: repeat;
+	background-size: 250px;
+	background-color: #f8f3e7;
+	min-height: 75px;
+	padding: 10px 0
+}
+
+	#logo-skytrax-wap .container {
+		background-color: transparent;
+		max-width: 1000px;
+		width: 100%;
+		margin: auto;
+		position: relative;
+		padding: 0
+	}
+
+.logo-skytrax-img {
+	display: inline-block;
+	min-width: 120px;
+	vertical-align: middle;
+	width: 120px;
+	text-align: center
+}
+
+	.logo-skytrax-img img {
+		display: block;
+		margin: auto;
+		width: 85px;
+		position: absolute;
+		left: 0;
+		bottom: -30px
+	}
+
+.logo-skytrax-txt h4 {
+	color: #0b6e8b;
+	font-size: 15px;
+	margin-top: 0;
+	margin-bottom: 5px
+}
+
+.logo-skytrax-txt {
+	display: inline-block;
+	vertical-align: middle;
+	width: 50%;
+	font-size: 13px;
+	padding-left: 10px;
+	color: #333
+}
+
+	.logo-skytrax-txt p, .logo-skytrax-txt > p, #logo-skytrax-wap p {
+		margin-bottom: 0;
+		color: #333
+	}
+
+.page-home-wrapper form {
+	overflow: hidden
+}
+
+#navbar-top {
+	background-color: #fff;
+	height: 80px;
+	margin-bottom: 0;
+	position: relative;
+	border-radius: 0;
+	padding: 0;
+	top: 0;
+	z-index: 0;
+	float: left
+}
+
+.header-wrapper {
+	clear: both;
+	overflow: visible
+}
+
+.vnalogo {
+	float: left;
+	max-width: 325px;
+	position: relative
+}
+
+	.vnalogo a.navbar-brand {
+		display: block;
+		max-width: 88%;
+		overflow: hidden;
+		height: auto;
+		padding: 5px 0;
+		float: left
+	}
+
+	.vnalogo a.skyteam-logo {
+		float: left;
+		width: 35px;
+		height: 35px;
+		top: 15px;
+		position: absolute;
+		right: 0
+	}
+
+.headernav {
+	float: right;
+	max-width: 600px;
+	text-align: right;
+	overflow: visible
+}
+
+.site-top {
+	height: 36px;
+	margin-bottom: 5px;
+	overflow: visible;
+	padding-top: 5px;
+	width: 100%
+}
+
+	.site-top ul {
+		float: right;
+		text-align: right;
+		margin: 0
+	}
+
+		.site-top ul li {
+			float: left;
+			list-style-type: none
+		}
+
+			.site-top ul li.lotusmile-logo, .site-top ul li.login-link, .site-top ul li.search-icon {
+				font-family: "OpenSans-Light",Arial
+			}
+
+			.site-top ul li.lotusmile-logo {
+				padding-top: 3px;
+				padding-right: 2px
+			}
+
+				.site-top ul li.lotusmile-logo p {
+					line-height: 18px;
+					color: #000;
+					padding-right: 5px;
+					font-family: "OpenSans",Arial;
+					font-size: 13px;
+					float: left;
+					margin: 0;
+					padding-left: 4px
+				}
+
+			.site-top ul li a {
+				float: left
+			}
+
+			.site-top ul li.lotusmile-logo img {
+				float: left;
+				width: 90px
+			}
+
+.navbar {
+	border: none
+}
+
+ul.primary-nav {
+	clear: both;
+	float: right;
+	margin: 0
+}
+
+.primary-nav > li {
+	position: static;
+	float: left;
+	left: 0;
+	display: block
+}
+
+	.primary-nav > li > a, .primary-nav > li > a:visited, .primary-nav .open > li a {
+		color: #000;
+		display: block;
+		font-family: "DiavloLight",Arial;
+		font-size: 18px;
+		font-weight: 400;
+		height: 39px;
+		line-height: 36px;
+		padding: 0;
+		transition-duration: 0.2s;
+		-webkit-transition-duration: 0.2s;
+		-moz-transition-duration: 0.2s;
+		-o-transition-duration: 0.2s;
+		-webkit-transition-timing-function: linear;
+		-o-transition-timing-function: linear;
+		transition-timing-function: linear
+	}
+
+#navbar-collapse-top.navbar-collapse {
+	padding-right: 0
+}
+
+.primary-nav > li.dropdown a.dropdown-toggle {
+	display: block;
+	z-index: 7;
+	padding: 0 7px;
+	border: 1px solid transparent
+}
+
+.footer {
+	background-color: #0685aa;
+	background-position: center bottom;
+	clear: both;
+	padding-bottom: 20px;
+	overflow: hidden
+}
+
+	.footer p {
+		font-size: 13px;
+		color: #d9f6ff;
+		text-align: left;
+		padding: 0;
+		display: block;
+		line-height: 17px;
+		margin-bottom: 0;
+		min-height: 25px;
+		font-family: "OpenSans",Arial
+	}
+
+.header {
+	position: relative;
+	clear: both
+}
+
+a, a:focus, a:visited {
+	outline: none;
+	color: #000;
+}
+
+body {
+	font-family: "OpenSans";
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	position: relative;
+	overflow-x: hidden;
+	padding-right: 0 !important
+}
+
+.navbar-footer ul.dropdown-menu > li {
+	width: 100%
+}
+
+	.navbar-footer ul.dropdown-menu > li > a {
+		cursor: pointer;
+		transition: ease-in-out 0.3s;
+		-webkit-transition: ease-in-out 0.3s;
+		-moz-transition: ease-in-out 0.3s;
+		-ms-transition: ease-in-out 0.3s;
+		-o-transition: ease-in-out 0.3s
+	}
+
+		.navbar-footer ul.dropdown-menu > li > a:hover {
+			color: #e2aa11
+		}
+
+.navbar-footer li h4 {
+	font-size: 16px;
+	color: #e2aa11;
+	display: inline-block;
+	margin: 0;
+	font-family: "DiavloLight",Arial
+}
+
+.navbar-footer li.dropdown a:hover, .navbar-footer li.dropdown a:focus, .navbar-footer li.dropdown.open > a:focus, .navbar-footer li.dropdown.open > a:visited {
+	background-color: #0685aa
+}
+
+.navbar-footer .nav.navbar-nav {
+	width: 100%;
+	margin: 0
+}
+
+	.navbar-footer .nav.navbar-nav li.dropdown {
+		float: left;
+		width: 20%
+	}
+
+.navbar-footer .navbar-nav li ul.dropdown-menu {
+	display: block;
+	position: relative;
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+	z-index: 1
+}
+
+.navbar-footer {
+	padding-top: 30px
+}
+
+	.navbar-footer li > a, .navbar-footer li > a:focus {
+		font-size: 13px;
+		color: #d9f6ff;
+		text-align: left;
+		padding: 5px 0;
+		display: inline-block;
+		line-height: 19px;
+		cursor: default;
+		white-space: normal;
+		font-family: "OpenSans",Arial;
+		text-transform: capitalize;
+		background-color: transparent
+	}
+
+.animated {
+	-vendor-animation-duration: 0s;
+	-vendor-animation-delay: 0s;
+	-vendor-animation-iteration-count: infinite;
+	-webkit-vendor-animation-duration: 0s;
+	-webkit-vendor-animation-delay: 0s;
+	-webkit-vendor-animation-iteration-count: infinite;
+	-moz-vendor-animation-duration: 0s;
+	-moz-vendor-animation-delay: 0s;
+	-moz-vendor-animation-iteration-count: infinite
+}
+
+.container-wrapper {
+	max-width: 1000px;
+	position: relative;
+	margin: auto;
+	clear: both;
+	border-radius: 4px
+}
+
+@media screen and (min-width: 320px) {
+	.item-img-col {
+		max-width: 49%;
+		padding: 5px
+	}
+
+	.big-switcher .switcher-label {
+		padding: 0;
+		line-height: 40px;
+		height: 40px;
+		margin-right: 9px !important
+	}
+
+	#mobile-yourtrip-form .arrow_af {
+		line-height: 30px
+	}
+
+	.logo-skytrax-txt {
+		width: calc(100% - 140px)
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.item-img-col {
+		max-width: 19%;
+		padding: 15px
+	}
+
+	.big-switcher .switcher-label {
+		margin: 4px !important;
+		line-height: 38px
+	}
+
+	.logo-skytrax-txt {
+		width: calc(70% - 140px)
+	}
+}
+
+.headernav {
+	max-width: 675px
+}
+
+	.headernav ul.register li.lotusmile-logo a p {
+		line-height: 1;
+		margin-top: 2px
+	}
+
+	.headernav ul.register li.lotusmile-logo:not(:first-child) > a p {
+		border-left: 1px solid #999;
+		padding-left: 5px
+	}
+
+ul.primary-nav .dropdown {
+	overflow: hidden;
+	border-radius: 5px 5px 0 0;
+	transition-duration: 0.2s;
+	-webkit-transition-duration: 0.2s;
+	-moz-transition-duration: 0.2s;
+	-o-transition-duration: 0.2s;
+	-webkit-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear
+}
+
+	ul.primary-nav .dropdown a.dropdown-toggle {
+		padding: 10px;
+		line-height: 1;
+		height: 40px;
+		font-size: 17px;
+		font-family: "DiavloBook-Regular",Arial
+	}
+
+	ul.primary-nav .dropdown:last-child a.dropdown-toggle {
+		padding-right: 0
+	}
+
+.headernav .site-top ul li a.hd-support {
+	padding: 0 5px;
+	margin-top: 2px;
+	display: flex;
+	align-items: center
+}
+
+	.headernav .site-top ul li a.hd-support .img-support-hd {
+		width: 30px;
+		height: 17px;
+		display: flex;
+		justify-content: center;
+		margin-right: 3px
+	}
+
+	.headernav .site-top ul li a.hd-support p {
+		margin: 0;
+		display: block;
+		color: #927200
+	}
+
+.register {
+	position: relative
+}
+
+.navbar-footer .nav.navbar-nav li.dropdown a.dropdown-toggle {
+	display: block
+}
+
+.navbar-footer .nav.navbar-nav li a {
+	color: #fff
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+}
+
+.plane {
+	margin: 20px auto;
+	max-width: 600px;
+}
+.plane1 {
+	flex: 1; 
+	position: relative;
+	margin: 325px auto;
+	max-width: 350px;
+}
+.plane2 {
+	display: flex;
+}
+.cockpit {
+	height: 250px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	border-bottom: 5px solid #d8d8d8;
+}
+
+	.cockpit:before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 500px;
+		width: 100%;
+		border-radius: 50%;
+		border-right: 5px solid #d8d8d8;
+		border-left: 5px solid #d8d8d8;
+	}
+
+	.cockpit h1 {
+		width: 60%;
+		margin: 100px auto 35px auto;
+	}
+
+.exit {
+	position: relative;
+	height: 50px;
+}
+
+	.exit:before, .exit:after {
+		content: "EXIT";
+		font-size: 14px;
+		line-height: 18px;
+		padding: 0px 2px;
+		font-family: "Arial Narrow", Arial, sans-serif;
+		display: block;
+		position: absolute;
+		background: green;
+		color: white;
+		top: 50%;
+		transform: translate(0, -50%);
+	}
+
+	.exit:before {
+		left: 0;
+	}
+
+	.exit:after {
+		right: 0;
+	}
+
+.fuselage {
+	border-right: 5px solid #d8d8d8;
+	border-left: 5px solid #d8d8d8;
+}
+
+ol {
+	list-style: none;
+	padding: 10px;
+	margin: 0;
+}
+
+.seats {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+}
+.seats1 {
+	
+}
+
+.seat {
+	display: flex;
+	flex: 0 0 14.2857142857%;
+	padding: 5px;
+	position: relative;
+}
+
+	.seat:nth-child(3) {
+		margin-right: 14.2857142857%;
+	}
+
+	.seat input[type=checkbox] {
+		position: absolute;
+		opacity: 0;
+	}
+
+		.seat input[type=checkbox]:checked + label {
+			background: #bada55;
+			-webkit-animation-name: rubberBand;
+			animation-name: rubberBand;
+			animation-duration: 300ms;
+			animation-fill-mode: both;
+		}
+
+		.seat input[name="ThuongGia"]:disabled + label {
+			overflow: hidden;
+		}
+		.seat input[name="ThuongGia"]:disabled + label:hover {
+			box-shadow: none;
+			cursor: not-allowed;
+		}
+
+			.seat input[type=checkbox]:disabled:checked + label {
+				background: #dddddd;
+				text-indent: -9999px;
+				overflow: hidden;
+			}
+
+			.seat input[type=checkbox]:disabled:checked + label:after {
+				content: "X";
+				text-indent: 0;
+				position: absolute;
+				top: 4px;
+				left: 50%;
+				transform: translate(-50%, 0%);
+			}
+
+			.seat input[type=checkbox]:disabled + label:hover {
+				box-shadow: none;
+				cursor: not-allowed;
+			}
+
+	.seat label {
+		display: block;
+		position: relative;
+		width: 100%;
+		text-align: center;
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 1.5rem;
+		padding: 4px 0;
+		background: #f42536;
+		border-radius: 5px;
+		animation-duration: 300ms;
+		animation-fill-mode: both;
+	}
+	.seat label[name*="Thuong Gia"] {
+		background: blue; 
+	}
+		.seat label:before {
+			content: "";
+			position: absolute;
+			width: 75%;
+			height: 75%;
+			top: 1px;
+			left: 50%;
+			transform: translate(-50%, 0%);
+			background: rgba(255, 255, 255, 0.4);
+			border-radius: 3px;
+		}
+
+		.seat label:hover {
+			cursor: pointer;
+			box-shadow: 0 0 0px 2px #5c6aff;
+		}
+
+@-webkit-keyframes rubberBand {
+	0% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+
+	30% {
+		-webkit-transform: scale3d(1.25, 0.75, 1);
+		transform: scale3d(1.25, 0.75, 1);
+	}
+
+	40% {
+		-webkit-transform: scale3d(0.75, 1.25, 1);
+		transform: scale3d(0.75, 1.25, 1);
+	}
+
+	50% {
+		-webkit-transform: scale3d(1.15, 0.85, 1);
+		transform: scale3d(1.15, 0.85, 1);
+	}
+
+	65% {
+		-webkit-transform: scale3d(0.95, 1.05, 1);
+		transform: scale3d(0.95, 1.05, 1);
+	}
+
+	75% {
+		-webkit-transform: scale3d(1.05, 0.95, 1);
+		transform: scale3d(1.05, 0.95, 1);
+	}
+
+	100% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes rubberBand {
+	0% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+
+	30% {
+		-webkit-transform: scale3d(1.25, 0.75, 1);
+		transform: scale3d(1.25, 0.75, 1);
+	}
+
+	40% {
+		-webkit-transform: scale3d(0.75, 1.25, 1);
+		transform: scale3d(0.75, 1.25, 1);
+	}
+
+	50% {
+		-webkit-transform: scale3d(1.15, 0.85, 1);
+		transform: scale3d(1.15, 0.85, 1);
+	}
+
+	65% {
+		-webkit-transform: scale3d(0.95, 1.05, 1);
+		transform: scale3d(0.95, 1.05, 1);
+	}
+
+	75% {
+		-webkit-transform: scale3d(1.05, 0.95, 1);
+		transform: scale3d(1.05, 0.95, 1);
+	}
+
+	100% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+.rubberBand {
+	-webkit-animation-name: rubberBand;
+	animation-name: rubberBand;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'poppins',sans-serif;
+}
+
+section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 120vh;
+	width: 100%;
+	background: url('../Images/flights/Background.jpg')no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+section1 {
+	display: flex;
+	justify-content: center;
+	min-height: 120vh;
+	width: 100%;
+	background: no-repeat;
+	background-position: center;
+	background-size: cover;
+	align-items: flex-start;
+}
+
+.form-box {
+	position: relative;
+	width: 400px;
+	height: 450px;
+	background: transparent;
+	border: 2px solid rgba(255,255,255,0.5);
+	border-radius: 20px;
+	backdrop-filter: blur(15px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+h2 {
+	font-size: 2em;
+	color: #fff;
+	text-align: center;
+}
+
+.inputbox {
+	position: relative;
+	margin: 30px 0;
+	width: 310px;
+	border-bottom: 2px solid #fff;
+}
+
+	.inputbox label {
+		position: absolute;
+		top: 50%;
+		left: 5px;
+		transform: translateY(-50%);
+		color: #fff;
+		font-size: 1em;
+		pointer-events: none;
+		transition: .5s;
+	}
+
+input:focus ~ label,
+input:valid ~ label {
+	top: -5px;
+}
+
+.inputbox input {
+	width: 100%;
+	height: 50px;
+	background: transparent;
+	border: none;
+	outline: none;
+	font-size: 1em;
+	padding: 0 35px 0 5px;
+	color: #fff;
+}
+
+.inputbox ion-icon {
+	position: absolute;
+	right: 8px;
+	color: #fff;
+	font-size: 1.2em;
+	top: 20px;
+}
+
+.forget {
+	margin: -15px 40px 15px;
+	font-size: .9em;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+}
+
+	.forget label input {
+		margin-right: -10px;
+	}
+
+	.forget label a {
+		color: #fff;
+		text-decoration: none;
+	}
+
+		.forget label a:hover {
+			text-decoration: underline;
+		}
+
+button {
+	width: 100%;
+	height: 40px;
+	border-radius: 40px;
+	background: #fff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: 600;
+}
+
+.register {
+	font-size: .9em;
+	color: #fff;
+	text-align: center;
+	margin: 25px 0 10px;
+}
+
+	.register p a {
+		text-decoration: none;
+		color: #fff;
+		font-weight: 600;
+	}
+
+		.register p a:hover {
+			text-decoration: underline;
+		}

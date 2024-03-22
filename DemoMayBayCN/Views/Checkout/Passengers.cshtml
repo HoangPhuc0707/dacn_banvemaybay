@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div id="content_wrapper">
+    <!--page title Start-->
+    <div class="page_title" data-stellar-background-ratio="0" data-stellar-vertical-offset="0" style="background-image: url(/images/bg/page_title_bg.jpg);">
+        <ul>
+            <li><a href="javascript:;">Gói Đặt Vé</a></li>
+        </ul>
+    </div>
+    <!--page title end-->
+    <div class="clearfix"></div>
+    <div class="full_width destinaion_sorting_section">
+        <div class="container">
+            <div class="row space_100">
+                <!-- right main start -->
+                <div class="col-lg-12">
+                    <div class="tour_package_booking_section">
+                        <!-- package tabs start -->
+                        <div id="personal_info" class="main_content_area hotel_main_content">
+                            <!--  tab inner section three Start -->
+                            <div class="inner_container">
+                                <form class="package_booking_main">
+                                    <h4 style="text-align:center">Vui lòng nhập thông tin hành khách </h4>
+                                    <div class="tab_inner_section inner_section_2 flight_inner_section">
+                                        <div class="tab_inner_body full_width">
+                                            <!-- package_booking_form start -->
+                                            <div id="app" class="package_booking_form">
+                                            </div>
+                                            <!--  package_booking_form END -->
+                                        </div>
+                                        <!--  tab_inner_body end -->
+                                    </div>
+                                    <!--  tab inner three section End -->
+                                    <!-- proceed button -->
+                                    
+                                    <!-- proceed button -->
+                                    <div class="full_width t_align_c">
+                                        <button type="submit" value="proceed to next step" class="btn_green proceed_buttton btns">Tiếp Theo</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--  inner container end -->
+                        </div>
+                        <!-- package tabs End -->
+                    </div>
+                    <!-- right main start -->
+                </div>
+                <!-- col-lg-9-end -->
+            </div>
+            <!--  row main -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- main wrapper -->
+</div>
+<script>
+    function validateForm() {
+        var isValid = true;
+
+        // Iterate over all passenger containers
+        $('.passenger-container').each(function () {
+            // Check if any of the required fields are empty
+            if (
+                $(this).find('input[name^="hoten"]').val() === '' ||
+                $(this).find('input[name^="ngaysinh"]').val() === '' ||
+                $(this).find('select[name^="gioitinh"]').val() === '' ||
+                $(this).find('input[name^="sodienthoai"]').val() === '' ||
+                $(this).find('input[name^="email"]').val() === '' ||
+                $(this).find('input[name^="diachi"]').val() === ''
+            ) {
+                isValid = false;
+                return false; // Exit the loop if any field is empty
+            }
+        });
+
+        return isValid;
+    }
+    $(document).ready(function () {
+        var searchParams = new URLSearchParams(window.location.search);
+        var typeTicket = searchParams.get('typeTicket');
+        var departureCode = searchParams.get('departureCode');
+        var arriveCode = searchParams.get('arriveCode');
+        var departureDay = searchParams.get('departureDay');
+        var availableSeats = searchParams.get('availableSeats');
+        for (var i = 0; i < availableSeats; i++) {
+            createForm(i + 1);
+        }
+
+        function createForm(index) {
+            const passengerHtml = `
+                <div class="passenger-container">
+                    <h4 style="text-align:center">Thông tin hành khách ${index}</h4>
+                    <div class="col-lg-12">
+                        <input type="text" placeholder="Họ Tên" name="hoten${index}" class="booking_input">
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="text" id="Check_in_date_tab${index}" placeholder="Ngày Sinh" name="ngaysinh" class="booking_input"><i class="fa fa-calendar"></i>
+                    </div>
+                    <div class="col-lg-12">
+                        <select name="gioitinh${index}" class="booking_input">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="text" placeholder="Số Điện Thoại" name="sodienthoai${index}" class="booking_input">
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="email" placeholder="Email" name="email${index}" class="booking_input">
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="text" placeholder="Địa Chỉ" name="diachi${index}" class="booking_input">
+                    </div>
+                </div>`;
+            // Append the content for each passenger to the #app container
+            $('#app').append(passengerHtml);
+            $(`#Check_in_date_tab${index}`).datetimepicker({
+                yearOffset: 0,
+                timepicker: false,
+                format: 'd/m/Y',
+                formatDate: 'Y/m/d',
+                minDate: '-2000/01/02',
+            });
+            $('.proceed_buttton').click(function(e){
+                e.preventDefault();
+
+                if (!validateForm()) {
+                    alert('Vui lòng điền đầy đủ thông tin.');
+                    return;
+                }
+
+
+                var passengers = [];
+
+                // Lặp qua tất cả các div chứa thông tin hành khách
+                $('.passenger-container').each(function () {
+                    var passenger = {
+                        FullName: $(this).find('input[name^="hoten"]').val(),
+                        NgaySinh: $(this).find('input[name^="ngaysinh"]').val(),
+                        Gender: $(this).find('select[name^="gioitinh"]').val(),
+                        Phone: $(this).find('input[name^="sodienthoai"]').val(),
+                        Email: $(this).find('input[name^="email"]').val(),
+                        Address: $(this).find('input[name^="diachi"]').val()
+                    };
+
+                    passengers.push(passenger);
+                });
+
+                $.ajax({
+                    url: '/api/CheckOut/ProcessBooking',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(passengers),
+                    success: function (response) {
+                        // Xử lý phản hồi từ server (nếu cần)
+                        console.log(response.data);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+                if (typeTicket == "one-way") {
+                    window.location.href = '/CheckOut/TicketInformation?typeTicket=' + 'one-way' + '&departureCode=' + departureCode + '&arriveCode=' + arriveCode + '&departureDay=' + departureDay + '&availableSeats=' + availableSeats;
+
+                }
+                if (typeTicket == "round-trip") {
+                    window.location.href = '/CheckOut/TicketInformation?typeTicket=' + 'round-trip' + '&departureCode=' + departureCode + '&arriveCode=' + arriveCode + '&departureDay=' + departureDay + '&availableSeats=' + availableSeats;
+                }
+            });
+        }
+    });
+</script>

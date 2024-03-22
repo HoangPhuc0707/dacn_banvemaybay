@@ -1,0 +1,530 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+<div class="card card-title bg-white p-1">
+    <div class="row">
+        <div class="col-md-6 "> <h5 class="pl-2 mt-2 text-blues">Quản lý chuyến bay </h5> </div>
+        <div class="col-md-6 m-0">
+        </div>
+    </div>
+</div>
+
+<div class="search-container">
+    <label for="SearchString" style="margin-right: 10px">Tìm mã chuyến bay : </label>
+    <input type="text" id="searchInput" placeholder="Nhập mã chuyến bay">
+    <input type="submit" value="Tìm kiếm" id="search-button">
+</div>
+
+<button class="btn btn-primary add"><i class="fas fa-plus"></i>Thêm chuyến bay</button>
+
+<div id="app"></div>
+<div id="pagination"></div>
+
+<div class="modal" id="addFlightModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bảng thông tin chuyến bay</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Đặt nội dung của form thêm thành phố ở đây -->
+                <form id="addCityForm">
+                    <div class="form-group row" id="FlightNumber1">
+                        <label for="FlightNumber" class="col-md-3 col-form-label">Số hiệu chuyến bay</label>
+                        <div class="col-md-9">
+                            <input type="text" id="FlightNumber" name="FlightNumber" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="DepartureDay" class="col-md-3 col-form-label">Ngày bay</label>
+                        <div class="col-md-9">
+                            <input type="text" id="DepartureDay" name="DepartureDay" class="form-control datepicker" />
+                            <span id="DepartureDayError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ArrivalTime" class="col-md-3 col-form-label">Giờ bay</label>
+                        <div class="col-md-9">
+                            <input type="text" id="ArrivalTime" name="ArrivalTime" class="form-control timepicker" />
+                            <span id="ArrivalTimeError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="DepartureTime" class="col-md-3 col-form-label">Giờ đến</label>
+                        <div class="col-md-9">
+                            <input type="text" id="DepartureTime" name="DepartureTime" class="form-control timepicker" />
+                            <span id="DepartureTimeError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ArrivalCity" class="col-md-3 col-form-label">Điểm bay</label>
+                        <div class="col-md-9">
+                            @*<input type="text" id="ArrivalCity" name="ArrivalCity" class="form-control" />*@
+                            <select class="form-control" id="ArrivalCity" name="ArrivalCity">
+                            </select>
+                            <span id="ArrivalCityError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="DepartureCity" class="col-md-3 col-form-label">Điểm đến</label>
+                        <div class="col-md-9">
+                            @*<input type="text" id="DepartureCity" name="DepartureCity" class="form-control" />*@
+                            <select class="form-control" id="DepartureCity" name="DepartureCity">
+                            </select>
+                            <span id="DepartureCityError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="TotalSeats1">
+                        <label for="TotalSeats" class="col-md-3 col-form-label">Tổng ghế</label>
+                        <div class="col-md-9">
+                            <input type="text" id="TotalSeats" name="TotalSeats" class="form-control" />
+                            <span id="TotalSeatsError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="AvailableSeats1">
+                        <label for="AvailableSeats" class="col-md-3 col-form-label">Ghế trống</label>
+                        <div class="col-md-9">
+                            <input type="text" id="AvailableSeats" name="AvailableSeats" class="form-control" />
+                            <span id="AvailableSeatsError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="ThuongGia1">
+                        <label for="ThuongGia" class="col-md-3 col-form-label">Giá vé thương gia </label>
+                        <div class="col-md-9">
+                            <input type="text" id="ThuongGia" name="ThuongGia" class="form-control" />
+                            <span id="ThuongGiaError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="PhoThong1">
+                        <label for="PhoThong" class="col-md-3 col-form-label">Giá vé phổ thông </label>
+                        <div class="col-md-9">
+                            <input type="text" id="PhoThong" name="PhoThong" class="form-control" />
+                            <span id="PhoThongError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="HinhAnh1">
+                        <label for="HinhAnh" class="col-md-3 col-form-label">Hình ảnh</label>
+                        <div class="col-md-9">
+                            <input type="file" id="HinhAnh" name="HinhAnh" class="form-control" accept=".png,.jpg,.jpeg" />
+                            <span id="HinhAnhError" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="HinhAnhPreview1">
+                        <label for="HinhAnh" class="col-md-3 col-form-label">Hình ảnh</label>
+                        <div class="col-md-9">
+                            <img id="HinhAnhPreview" src="" alt="" width="100" height="100">
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group row" id="NguoiLap1">
+                        <label for="NguoiLap" class="col-md-3 col-form-label">Người lập</label>
+                        <div class="col-md-9">
+                            <input type="text" id="NguoiLap" name="NguoiLap" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeFlightBtn" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="saveFlightBtn" >Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $.formattedDate = function (dateToFormat) {
+        var dateObject = new Date(dateToFormat);
+        var day = dateObject.getDate();
+        var month = dateObject.getMonth() + 1;
+        var year = dateObject.getFullYear();
+        day = day < 10 ? "0" + day : day;
+        month = month < 10 ? "0" + month : month;
+        var formattedDate = day + "/" + month + "/" + year;
+        return formattedDate;
+    };
+    $(function () {
+        $('.timepicker').timepicker({
+            timeFormat: 'H:i:s',
+            step: 15,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+    $(function () {
+        $('.datepicker').datepicker({
+            dateFormat: 'dd/mm/yy', // Định dạng ngày tháng năm
+            changeYear: true, // Cho phép lựa chọn năm
+            yearRange: '-100:+0', // Giới hạn lựa chọn từ năm hiện tại trở về 100 năm trước
+        });
+    });
+    
+    var currentPage = 1;
+    function getFlights(FlightNumber, pageNumber) {
+        $.ajax({
+            url: '/api/Flights/GetAllFlight',
+            method: "GET",
+            data: {
+                keySearch: FlightNumber,
+                PageNumber: pageNumber,
+            },
+            success: function (data) {
+                renderTable(data.data);
+                displayPagination(data.pagination);
+                currentPage = pageNumber;
+            }
+        });
+    }
+    function renderTable(flights) {
+        const tableHeader = `
+                    <tr>
+        <th>Id</th>
+        <th>Số hiệu máy bay</th>
+        <th>Ngày bay</th>
+        <th>Giờ bay</th>
+        <th>Giờ đến</th>
+        <th>Điểm bay</th>
+        <th>Điểm đến</th>
+        <th>Tổng ghế</th>
+        <th>Ghế trống</th>
+        <th colspan="2" style="text-align:center">Giá vé
+            <table>
+                <tr>
+                    <td>thương gia</td>
+                    <td>phổ thông</td>
+                </tr>
+            </table>
+        </th>
+        <th>Hình ảnh</th>
+        <th>Người lập</th>
+        <th></th>
+    </tr>
+            `;
+        const flightsHtml = flights.map(flight => `
+                <tr>
+                    <td>${flight.flightID}</td>
+                    <td>${flight.flightNumber}</td>
+                    <td>${$.formattedDate(flight.departureDay)}</td>
+                    <td>${flight.arrivalTime}</td>
+                    <td>${flight.departureTime}</td>
+                    <td>${flight.airports1.city}</td>
+                    <td>${flight.airports.city}</td>
+                    <td style="width:10px">${flight.totalSeats}</td>
+                    <td style="width:10px">${flight.availableSeats}</td>
+                    <td style="width:10px">${flight.fares.filter(fare => fare.fareType === 'Thương Gia').map(fare => fare.fareAmount)}</td>
+                    <td style="width:10px">${flight.fares.filter(fare => fare.fareType === 'Phổ Thông').map(fare => fare.fareAmount)}</td>
+                    <td><img src="/images/flights/${flight.hinhAnh}" width="100" height="100" /></td>
+                    <td>${flight.aspNetUser.fullName}</td>
+                    <td>
+                        <button data-id="${flight.flightID}" class="edit-btn btn btn-primary" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        <button data-id="${flight.flightID}" class="detail-btn btn btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                        <button data-id="${flight.flightID}" class="delete-btn btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        const tableHtml = `<table class="table table-striped" id="tblBrands">${tableHeader}${flightsHtml}</table>`;
+        $('#app').html(tableHtml);
+    }
+    function displayPagination(paginationInfo) {
+        var totalPages = paginationInfo.totalPages;
+        var currentPage = paginationInfo.currentPage;
+        var flightNumber = $('#searchInput').val();
+        var paginationHtml = '<div class="pagination">';
+        if (currentPage > 1) {
+            paginationHtml += '<a href="#" onclick="getFlights(\'' + flightNumber + '\',' + (currentPage - 1) + ')">&laquo;</a>';
+        }
+        for (var i = 1; i <= totalPages; i++) {
+            if (i === currentPage) {
+                paginationHtml += '<a href="#" class="active" onclick="getFlights(\'' + flightNumber + '\',' + i + ')">' + i + '</a>';
+            }
+            else {
+                paginationHtml += '<a href="#" onclick="getFlights(\'' + flightNumber + '\',' + i + ')">' + i + '</a>';
+            }
+        }
+        if (currentPage < totalPages) {
+            paginationHtml += '<a href="#" onclick="getFlights(\'' + flightNumber + '\',' + (currentPage + 1) + ')">&raquo;</a>';
+        }
+        paginationHtml += '</div>';
+
+
+        $('#pagination').html(paginationHtml);
+    }
+    $(document).ready(function () {
+        var currentAction = '';
+        var currentflightId = '';
+        $('#search-button').click(function (e) {
+            e.preventDefault();
+            var flightNumber = $('#searchInput').val();
+            var pageNumber = 1;
+            if (flightNumber == "") {
+                alert("không tìm thấy chuyến bay cần tìm")
+            }
+            getFlights(flightNumber, pageNumber);
+        });
+
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var pageNumber = $(this).text();
+            var flightNumber = $('#searchInput').val();
+            getFlights(flightNumber, pageNumber);
+        });
+        getFlights('', 1);
+
+        function refreshTable() {
+            var city = $('#searchInput').val();
+            getFlights(city, currentPage);
+        }
+
+        function resetInputs() {
+            $('input[type="text"]').each(function () {
+                $(this).val('');
+            });
+        }
+
+        function showButton() {
+            $('#saveCityBtn').show();
+            $('#closeCityBtn').show();
+        }
+
+        function hideDiv() {
+            $('#AvailableSeats1').hide();
+            $('#FlightNumber1').hide();
+            $('#NguoiLap1').hide();
+        }
+
+        function showDiv(){
+            $('#AvailableSeats1').show();
+            $('#FlightNumber1').show();
+            $('#NguoiLap1').show();
+        }
+        
+        function resetTextDanger(){
+            $("#ThuongGiaError").text("");
+            $("#PhoThongError").text("");
+            $("#AvailableSeatsError").text("");
+            $("#TotalSeatsError").text("");
+            $("#DepartureCityError").text("");
+            $("#ArrivalCityError").text
+            $("#DepartureTimeError").text("");
+            $("#ArrivalTimeError").text("");
+            $("#DepartureDayError").text("");
+            $("#HinhAnhError").text("");
+        }
+
+        function onLoadBody() {
+            $("#FlightNumber").prop("readOnly", true);
+            $("#DepartureDay").prop("readOnly", true);
+            $("#ArrivalTime").prop("readOnly", true);
+            $("#DepartureTime").prop("readOnly", true);
+            $("#DepartureCity").prop("readOnly", true);
+            $("#TotalSeats").prop("readOnly", true);
+            $("#AvailableSeats").prop("readOnly", true);
+            $("#ThuongGia").prop("readOnly", true);
+            $("#PhoThong").prop("readOnly", true);
+            $("#NguoiLap").prop("readOnly", true);
+        } 
+        $('.close, .btn-secondary').click(function (e) {
+            $('#addFlightModal').modal('hide')
+            resetInputs();
+            resetTextDanger();
+        });
+
+        $('.add').click(function (e) {
+            $('#addFlightModal').modal('show');
+            showButton();
+            hideDiv();
+            $('#HinhAnhPreview1').hide();
+            $.ajax({
+                url: '/api/Airports/GetAllAirport1',
+                method: 'GET',
+                success: function (data) {
+                    airport = data.data;
+                    airport.forEach(function (airport) {
+                        $('#ArrivalCity').append('<option value="' + airport.airportID + '">' + airport.city + '</option>');
+                        $('#DepartureCity').append('<option value="' + airport.airportID + '">' + airport.city + '</option>');
+                    });
+                }
+            });
+            currentAction = 'add';
+            
+        });
+        $('#app').on('click', '.edit-btn', function () {
+            $('#addFlightModal').modal('show');
+            $('#HinhAnhPreview1').hide();
+            hideDiv();
+            $('#TotalSeats1').hide();
+            $('#HinhAnh1').show();
+            $('#ArrivalCity').empty();
+            $('#DepartureCity').empty();
+            showButton();
+            //showDiv();
+            var flightId = $(this).data('id');
+            currentflightId = flightId;
+            $.ajax({
+                url: '/api/Flights/GetFlight',
+                method: 'GET',
+                data: {
+                    id: flightId
+                },
+                success: function (data) {
+                    flight = data.data;
+                    $('#FlightNumber').val(flight[0].flightNumber);
+                    $('#DepartureDay').val($.formattedDate(flight[0].departureDay));
+                    $('#ArrivalTime').val(flight[0].arrivalTime);
+                    $('#DepartureTime').val(flight[0].departureTime);
+                    //$('#ArrivalCity').val(flight[0].airports1.city);
+                    //$('#DepartureCity').val(flight[0].airports.city);
+                    $('#TotalSeats').val(flight[0].totalSeats);
+                    $('#AvailableSeats').val(flight[0].availableSeats);
+                    $('#ThuongGia').val(flight[0].fares[0].fareAmount);
+                    $('#PhoThong').val(flight[0].fares[1].fareAmount);
+                    //$('#HinhAnh').val(flight[0].hinhAnh);
+                    $('#NguoiLap').val(flight[0].aspNetUser.fullName);
+                }
+            });
+            $.ajax({
+                url: '/api/Airports/GetAllAirport1',
+                method: 'GET',
+                success: function (data) {
+                    airport = data.data;
+                    airport.forEach(function (airport) {
+                        $('#ArrivalCity').append('<option value="' + airport.airportID + '">' + airport.city + '</option>');
+                        $('#DepartureCity').append('<option value="' + airport.airportID + '">' + airport.city + '</option>');
+                    });
+                }
+            });
+            currentAction = 'edit';
+        });
+        
+        $('#app').on('click', '.delete-btn', function () {
+            if (confirm('Do you want to delete this data?')) {
+                var flightId = $(this).data('id');
+                $.ajax({
+                    url: '/api/Flights/deleteFlight/' + flightId,
+                    method: 'DELETE',
+                    data: {
+                        id: flightId
+                    },
+                    success: function (data) {
+                        alert(data.message);
+                        refreshTable();
+                    }
+                })
+            }
+            else {
+                $('#addFlightModal').modal('hide');
+            }
+        });
+
+        $('#app').on('click', '.detail-btn', function () {
+            $('#addFlightModal').modal('show');
+            var flightId = $(this).data('id');
+            $('#saveCityBtn').hide();
+            $('#closeCityBtn').hide();
+            $('#HinhAnh1').hide();
+            $('#HinhAnhPreview1').show();
+            onLoadBody();
+            showDiv();
+            $.ajax({
+                url: '/api/Flights/GetFlight',
+                method: 'GET',
+                data: {
+                    id: flightId
+                },
+                success: function (data) {
+                    flight = data.data;
+                    $('#ArrivalCity').empty();
+                    $('#DepartureCity').empty();
+                    $('#FlightNumber').val(flight[0].flightNumber);
+                    $('#DepartureDay').val($.formattedDate(flight[0].departureDay));
+                    $('#ArrivalTime').val(flight[0].arrivalTime);
+                    $('#DepartureTime').val(flight[0].departureTime);
+                    //$('#ArrivalCity').val(flight[0].airports1.city);
+                    //$('#DepartureCity').val(flight[0].airports.city);
+                    $('#ArrivalCity').append('<option value="' + flight[0].airports1.airportID + '">' + flight[0].airports1.city + '</option>');
+                    $('#DepartureCity').append('<option value="' + flight[0].airports.airportID + '">' + flight[0].airports.city + '</option>');
+                    $('#ThuongGia').val(flight[0].fares[0].fareAmount);
+                    $('#PhoThong').val(flight[0].fares[1].fareAmount);
+                    $('#TotalSeats').val(flight[0].totalSeats);
+                    $('#AvailableSeats').val(flight[0].availableSeats);
+                    $('#HinhAnhPreview').attr('src', '/images/flights/' + flight[0].hinhAnh);
+                    $('#NguoiLap').val(flight[0].aspNetUser.fullName);
+                }
+            })
+        });
+
+        $('#saveFlightBtn').click(function (e) {
+            var formData = new FormData();
+            formData.append('DepartureDay', $('#DepartureDay').val());
+            formData.append('ArrivalTime', $('#ArrivalTime').val());
+            formData.append('DepartureTime', $('#DepartureTime').val());
+            formData.append('ArrivalCity', $('#ArrivalCity').val());
+            formData.append('DepartureCity', $('#DepartureCity').val());
+            formData.append('TotalSeats', $('#TotalSeats').val());
+            formData.append('PhoThong',$('#PhoThong').val());
+            formData.append('ThuongGia',$('#ThuongGia').val());
+            formData.append('HinhAnh', $('#HinhAnh')[0].files[0]);
+
+            if (currentAction === 'add') {
+                $.ajax({
+                    url: '/api/Flights/addFlights',
+                    method: 'POST',
+                    //contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        alert(data.message);
+                        resetInputs();
+                        $('#addFlightModal').modal('hide');
+                        refreshTable();
+                        resetTextDanger();
+                    },
+                    error: function (xhr, status, error) {
+                        // Xử lý khi có lỗi
+                        var errors = xhr.responseJSON;
+                        displayErrors(errors);
+                    }
+                });
+            } else if (currentAction === 'edit') {
+                var flightId = currentflightId;
+                $.ajax({
+                    url: '/api/Flights/updateFlight/' + flightId,
+                    method: 'PUT',
+                    //contentType: "application/json; charset=utf-8",
+                    //data: JSON.stringify(data),
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        alert(data.message);
+                        resetInputs();
+                        $('#addFlightModal').modal('hide');
+                        refreshTable();
+                    }
+                });
+            }
+            currentAction = '';
+            currentflightId = '';
+        });
+        function displayErrors(errors) {
+            // Xử lý hiển thị lỗi
+            // Ví dụ: append lỗi vào một div có id là errorContainer
+            $("#ThuongGiaError").text(errors.errors["ThuongGia"]);
+            $("#PhoThongError").text(errors.errors["PhoThong"]);
+            $("#AvailableSeatsError").text(errors.errors["AvailableSeats"]);
+            $("#TotalSeatsError").text(errors.errors["TotalSeats"]);
+            $("#DepartureCityError").text(errors.errors["DepartureCity"]);
+            $("#ArrivalCityError").text(errors.errors["ArrivalCity"]);
+            $("#DepartureTimeError").text(errors.errors["DepartureTime"]);
+            $("#ArrivalTimeError").text(errors.errors["ArrivalTime"]);
+            $("#DepartureDayError").text(errors.errors["DepartureDay"]);
+            $("#HinhAnhError").text(errors.errors["HinhAnh"]);
+        }
+    });
+</script> 

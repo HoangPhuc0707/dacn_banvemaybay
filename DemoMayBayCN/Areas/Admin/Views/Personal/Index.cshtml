@@ -1,0 +1,109 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<div class="card card-title bg-white p-1 container">
+    <div class="row">
+        <div class="col-md-6 "> <h5 class="pl-2 mt-2 text-blues">Thông tin cá nhân</h5> </div>
+    </div>
+</div>
+<section class="pt-2 container card">
+    <div class=" bg-white p-4 ">
+        <form >
+            <input type="hidden" name="__RequestVerificationToken" value="<!-- AntiForgeryToken Value -->" />
+
+            <div class="row">
+                <div class="col-md-4">  </div>
+                <div class="col-md-4">
+                    <h3 class="text-center font-weight-bold text-success">Sửa thông tin cá nhân</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-sm bg-success text-white" id="editPersonalBtn"><i class="far fa-save"></i> Lưu</button>
+                        <a href="~/Admin/DashBoard/Index" class="btn btn-sm bg-danger text-white"><i class="far fa-window-close"></i>Hủy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Fullname">Fullname</label>
+                <input type="text" id="Fullname" name="Fullname" class="form-control" />
+                <!-- Validation message here -->
+            </div>
+
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <select id="Gender" name="Gender" class="form-control">
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                </select>
+                <!-- Validation message here -->
+            </div>
+
+            <div class="form-group">
+                <label for="Address">Address</label>
+                <input type="text" id="Address" name="Address" class="form-control" />
+                <!-- Validation message here -->
+            </div>
+
+            <div class="form-group">
+                <label for="PhoneNumber">PhoneNumber</label>
+                <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" />
+                <!-- Validation message here -->
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="text" id="Email" name="Email" class="form-control" />
+                <!-- Validation message here -->
+            </div>
+            
+        </form>
+    </div>
+</section>
+<script>
+    function getPersonal() {
+        $.ajax({
+            url: '/api/Users/GetPersonal',
+            method: "GET",
+            success: function (data) {
+                renderTable(data.data);
+            }
+        });
+    }
+    function renderTable(user) {
+        $("#Fullname").val(user.fullName);
+
+        // Set selected option for Gender dropdown
+        $("#Gender").val(user.gender);
+
+        // Set value for Address input
+        $("#Address").val(user.address);
+
+        // Set value for PhoneNumber input
+        $("#PhoneNumber").val(user.phoneNumber);
+
+        // Set value for Email input
+        $("#Email").val(user.email);
+    }
+    $(document).ready(function () {
+        getPersonal();
+        
+        $('#editPersonalBtn').click(function (e) {
+            e.preventDefault();
+            var data = {
+                FullName: $("#Fullname").val(),
+                Gender: $("#Gender").val(),
+                Address: $("#Address").val(),
+                PhoneNumber: $("#PhoneNumber").val(),
+                Email: $("#Email").val(),
+            }
+            $.ajax({
+                url: '/api/Users/EditPersonal',
+                method: 'PUT',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    alert(data.message);
+                    getPersonal();
+                }
+            });
+        });
+    });
+</script>

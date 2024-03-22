@@ -1,0 +1,341 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<div class="card card-title bg-white p-1">
+    <div class="row">
+        <div class="col-md-6 "> <h5 class="pl-2 mt-2 text-blues">Quản lý khách hàng </h5> </div>
+        <div class="col-md-6 m-0">
+        </div>
+    </div>
+</div>
+    
+<div class="search-container">
+    <label for="SearchString" style="margin-right: 10px">Tìm tên khách hàng : </label>
+    <input type="text" id="searchInput" placeholder="Nhập tên khách hàng ">
+    <input type="submit" value="Tìm kiếm" id="search-button">
+</div>
+
+<button class="btn btn-primary add"><i class="fas fa-plus"></i>Thêm khách hàng</button>
+
+<div id="app"></div>
+<div id="pagination"></div>
+
+<div class="modal" id="addPassengerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bảng thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Đặt nội dung của form thêm thành phố ở đây -->
+                <form id="addCityForm">
+                    <div class="form-group row">
+                        <label for="FullName" class="col-md-3 col-form-label">Họ và tên</label>
+                        <div class="col-md-9">
+                            <input type="text" id="FullName" name="FullName" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="NgaySinh" class="col-md-3 col-form-label">Ngày sinh</label>
+                        <div class="col-md-9">
+                            <input type="text" id="NgaySinh" name="NgaySinh" class="form-control datepicker" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Email" class="col-md-3 col-form-label">Email</label>
+                        <div class="col-md-9">
+                            <input type="email" id="Email" name="Email" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Gender" class="col-md-3 col-form-label">Giới tính</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="Gender" name="Gender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Phone" class="col-md-3 col-form-label">Số điện thoại</label>
+                        <div class="col-md-9">
+                            <input type="text" id="Phone" name="Phone" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Address" class="col-md-3 col-form-label">Địa chỉ</label>
+                        <div class="col-md-9">
+                            <input type="text" id="Address" name="Address" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closePassengerBtn" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="savePassengerBtn">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var currentPage = 1;
+    function getPassengers(fullname, pageNumber) {
+        $.ajax({
+            url: '/api/Passenger/GetAllPassenger',
+            method: "GET",
+            data: {
+                keySearch: fullname,
+                PageNumber: pageNumber,
+            },
+            success: function (data) {
+                renderTable(data.data);
+                displayPagination(data.pagination);
+                currentPage = pageNumber;
+            }
+        });
+    }
+    $.formattedDate = function (dateToFormat) {
+        var dateObject = new Date(dateToFormat);
+        var day = dateObject.getDate();
+        var month = dateObject.getMonth() + 1;
+        var year = dateObject.getFullYear();
+        day = day < 10 ? "0" + day : day;
+        month = month < 10 ? "0" + month : month;
+        var formattedDate = day + "/" + month + "/" + year;
+        return formattedDate;
+    };
+    $(function () {
+        $('.datepicker').datepicker({
+            dateFormat: 'dd/mm/yy', // Định dạng ngày tháng năm
+            changeYear: true, // Cho phép lựa chọn năm
+            yearRange: '-100:+0', // Giới hạn lựa chọn từ năm hiện tại trở về 100 năm trước
+        });
+    });
+    function renderTable(passengers) {
+        const tableHeader = `
+                <tr>
+                    <th>Id</th>
+                    <th>Họ tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th></th>
+                </tr>
+            `;
+        const passengersHtml = passengers.map(passenger => `
+                <tr>
+                    <td>${passenger.passengerID}</td>
+                    <td>${passenger.fullName}</td>
+                    <td>${$.formattedDate(passenger.ngaySinh)}</td>
+                    <td>${passenger.email}</td>
+                    <td>${passenger.gender}</td>
+                    <td>${passenger.phone}</td>
+                    <td>${passenger.address}</td>
+                    <td>
+                        <button data-id="${passenger.passengerID}" class="edit-btn btn btn-primary" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        <button data-id="${passenger.passengerID}" class="detail-btn btn btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                        <button data-id="${passenger.passengerID}" class="delete-btn btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        const tableHtml = `<table class="table table-striped" id="tblBrands">${tableHeader}${passengersHtml}</table>`;
+        $('#app').html(tableHtml);
+    }
+    function displayPagination(paginationInfo) {
+        var totalPages = paginationInfo.totalPages;
+        var currentPage = paginationInfo.currentPage;
+        var fullname = $('#searchInput').val();
+        var paginationHtml = '<div class="pagination">';
+        if (currentPage > 1) {
+            paginationHtml += '<a href="#" onclick="getPassengers(\'' + fullname + '\',' + (currentPage - 1) + ')">&laquo;</a>';
+        }
+        for (var i = 1; i <= totalPages; i++) {
+            if (i === currentPage) {
+                paginationHtml += '<a href="#" class="active" onclick="getPassengers(\'' + fullname + '\',' + i + ')">' + i + '</a>';
+            }
+            else {
+                paginationHtml += '<a href="#" onclick="getPassengers(\'' + fullname + '\',' + i + ')">' + i + '</a>';
+            }
+        }
+        if (currentPage < totalPages) {
+            paginationHtml += '<a href="#" onclick="getPassengers(\'' + fullname + '\',' + (currentPage + 1) + ')">&raquo;</a>';
+        }
+        paginationHtml += '</div>';
+
+
+        $('#pagination').html(paginationHtml);
+    }
+    $(document).ready(function () {
+        var currentAction = '';
+        var currentPassengerId = '';
+        $('#search-button').click(function (e) {
+            e.preventDefault();
+            var fullname = $('#searchInput').val();
+            var pageNumber = 1;
+            if (fullname == "") {
+                alert("không tìm thấy họ tên cần tìm")
+            }
+            getPassengers(fullname, pageNumber);
+        });
+        
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var pageNumber = $(this).text();
+            var fullname = $('#searchInput').val();
+            getPassengers(fullname, pageNumber);
+        });
+        getPassengers('', 1);
+
+        function refreshTable() {
+            var fullname = $('#searchInput').val();
+            getPassengers(fullname, currentPage);
+        }
+
+        function resetInputs() {
+            $('input[type="text"]').each(function () {
+                $(this).val('');
+            });
+            $('input[type="email"]').each(function () {
+                $(this).val('');
+            });
+            $('select[name="Gender"]').each(function () {
+                $(this).val('Nam');
+            });
+        }
+
+        function showButton() {
+            $('#savePassengerBtn').show();
+            $('#closePassengerBtn').show();
+        }
+
+        $('.close, .btn-secondary').click(function (e) {
+            $('#addPassengerModal').modal('hide')
+            resetInputs();
+        });
+
+        $('.add').click(function (e) {
+            $('#addPassengerModal').modal('show');
+            showButton();
+            currentAction = 'add';
+        });
+        $('#app').on('click', '.edit-btn', function () {
+            $('#addPassengerModal').modal('show');
+            showButton();
+            var passengerId = $(this).data('id');
+            currentPassengerId = passengerId;
+            $.ajax({
+                url: '/api/Passenger/GetPassenger',
+                method: 'GET',
+                data: {
+                    id: passengerId
+                },
+                success: function (data) {
+                    passenger = data.data;
+                    $('#FullName').val(passenger.fullName);
+                    $('#NgaySinh').val($.formattedDate(passenger.ngaySinh));
+                    $('#Email').val(passenger.email);
+                    $('#Gender').val(passenger.gender);
+                    $('#Phone').val(passenger.phone);
+                    $('#Address').val(passenger.address);
+                }
+            })
+            currentAction = 'edit';
+        });
+
+        $('#app').on('click', '.delete-btn', function () {
+            if (confirm('Do you want to delete this data?')) {
+                var passengerId = $(this).data('id');
+                $.ajax({
+                    url: '/api/Passenger/deletePassenger/' + passengerId,
+                    method: 'DELETE',
+                    data: {
+                        id: passengerId
+                    },
+                    success: function (data) {
+                        alert(data.message);
+                        refreshTable();
+                    }
+                })
+            }
+            else {
+                $('#addPassengerModal').modal('hide');
+            }
+        });
+
+        $('#app').on('click', '.detail-btn', function () {
+            $('#addPassengerModal').modal('show');
+            var passengerId = $(this).data('id');
+            $('#savePassengerBtn').hide();
+            $('#closePassengerBtn').hide();
+
+            $.ajax({
+                url: '/api/Passenger/GetPassenger',
+                method: 'GET',
+                data: {
+                    id: passengerId
+                },
+                success: function (data) {
+                    passenger = data.data;
+                    $('#FullName').val(passenger.fullName);
+                    $('#NgaySinh').val($.formattedDate(passenger.ngaySinh));
+                    $('#Email').val(passenger.email);
+                    $('#Gender').val(passenger.gender);
+                    $('#Phone').val(passenger.phone);
+                    $('#Address').val(passenger.address);
+                }
+            })
+        });
+
+        $('#savePassengerBtn').click(function (e) {
+            var data = {
+                FullName: $('#FullName').val(),
+                NgaySinh: $('#NgaySinh').val(),
+                Email: $('#Email').val(),
+                Gender: $('#Gender').val(),
+                Phone: $('#Phone').val(),
+                Address: $('#Address').val(),
+            }
+            if (currentAction === 'add') {
+                $.ajax({
+                    url: '/api/Passenger/addPassengers',
+                    method: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        alert(data.message);
+                        resetInputs();
+                        $('#addPassengerModal').modal('hide');
+                        refreshTable();
+                    }
+                });
+            } else if (currentAction === 'edit') {
+                var passengerId = currentPassengerId;
+                $.ajax({
+                    url: '/api/Passenger/updatePassenger/' + passengerId,
+                    method: 'PUT',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        alert(data.message);
+                        resetInputs();
+                        $('#addPassengerModal').modal('hide');
+                        refreshTable();
+                    }
+                });
+            }
+            currentAction = '';
+            currentPassengerId = '';
+        });
+    });
+</script>

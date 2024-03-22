@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link href="~/css/main.css" rel="stylesheet" />
+    <title>HASH TECHIE OFFICIAL</title>
+</head>
+
+<body>
+    <section>
+        <div id="login" class="form-box">
+            <div class="form-value">
+                <form class="form-horizontal" role="form" v-on:submit.prevent="Login">
+                    <h2>Đăng nhập</h2>
+                    <div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="text" id="Email" name="UserName" required v-model="LoginRequest.UserName">
+                        <label for="Email">UserName</label>
+                        <span class="text-danger"><!-- Add validation message for Email here --></span>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" id="Password" name="Password" required v-model="LoginRequest.Password">
+                        <label for="Password">Password</label>
+                        <span class="text-danger"><!-- Add validation message for Password here --></span>
+                    </div>
+                    <div v-if="errorMessage" class="text-danger">{{ errorMessage }}</div>
+                   @* <div class="forget">
+                        <div class="checkbox">
+                            <input type="checkbox" id="RememberMe" name="RememberMe" value="true">
+                            <label for="RememberMe">Remember Me</label>
+                        </div>
+                    </div>*@
+                    <button type="submit">Đăng nhập</button>
+                    <div class="register" v-on:click="Register">
+                        <p >Bạn chưa có tài khoản? <a>đăng ký</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
+@*<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>*@
+@*<script src="~/js/Account/Account.js"></script>*@
+<script>
+    Vue.config.ignoredElements = [/^ion-/]
+    var app = new Vue ({
+        el:'#login',
+        data:{
+            LoginRequest:{
+                UserName:'',
+                Password:''
+            },
+            errorMessage:'',
+        },
+        methods:{
+            Login(){
+                axios.post('/api/AuthManagerment/Login',this.LoginRequest)
+                    .then((response) => {
+                        $cookies.set('userName', app.LoginRequest.UserName)
+                        window.location.href = "@Url.Action("Index", "Flights")";
+                    }).catch((error) => {
+                        console.error(error.response.data);
+                        app.errorMessage = JSON.stringify(error.response.data.errors)
+                            .replace(/^\[|\]$/g, '')
+                            .replace(/"/g, '');
+                        
+                    });
+            },
+            Register() {
+                window.location.href = "@Url.Action("Register", "Account")";
+            }
+        },
+        mounted: function(){
+
+        },
+    });
+</script>
