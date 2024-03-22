@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DoAnCN1\\DemoMayBayCN\\DemoMayBayCN\\DemoMayBayCN.csproj": {}
+    "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\DemoMayBayCN\\DemoMayBayCN.csproj": {}
   },
   "projects": {
-    "D:\\DoAnCN1\\DemoMayBayCN\\DemoMayBayCN\\DemoMayBayCN.csproj": {
+    "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\DemoMayBayCN\\DemoMayBayCN.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DoAnCN1\\DemoMayBayCN\\DemoMayBayCN\\DemoMayBayCN.csproj",
+        "projectUniqueName": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\DemoMayBayCN\\DemoMayBayCN.csproj",
         "projectName": "DemoMayBayCN",
-        "projectPath": "D:\\DoAnCN1\\DemoMayBayCN\\DemoMayBayCN\\DemoMayBayCN.csproj",
+        "projectPath": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\DemoMayBayCN\\DemoMayBayCN.csproj",
         "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\DoAnCN1\\DemoMayBayCN\\DemoMayBayCN\\obj\\",
+        "outputPath": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\DemoMayBayCN\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\DoAnCN1\\DemoMayBayCN\\Libs\\Libs.csproj": {
-                "projectPath": "D:\\DoAnCN1\\DemoMayBayCN\\Libs\\Libs.csproj"
+              "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\Libs\\Libs.csproj": {
+                "projectPath": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\Libs\\Libs.csproj"
               }
             }
           }
@@ -112,14 +112,14 @@
         }
       }
     },
-    "D:\\DoAnCN1\\DemoMayBayCN\\Libs\\Libs.csproj": {
+    "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\Libs\\Libs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DoAnCN1\\DemoMayBayCN\\Libs\\Libs.csproj",
+        "projectUniqueName": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\Libs\\Libs.csproj",
         "projectName": "Libs",
-        "projectPath": "D:\\DoAnCN1\\DemoMayBayCN\\Libs\\Libs.csproj",
+        "projectPath": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\Libs\\Libs.csproj",
         "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\DoAnCN1\\DemoMayBayCN\\Libs\\obj\\",
+        "outputPath": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\Libs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -9,121 +9,121 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DemoMayBayCN
 build_property.RootNamespace = DemoMayBayCN
-build_property.ProjectDir = D:\DoAnCN1\DemoMayBayCN\DemoMayBayCN\
+build_property.ProjectDir = D:\DoAnCN1\DemoMayBayCN\dacn_banvemaybay\DemoMayBayCN\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\DoAnCN1\DemoMayBayCN\DemoMayBayCN
+build_property.MSBuildProjectDirectory = D:\DoAnCN1\DemoMayBayCN\dacn_banvemaybay\DemoMayBayCN
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/Airports/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/Airports/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWlycG9ydHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/Bookings/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/Bookings/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va2luZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/ChucVu/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/ChucVu/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2h1Y1Z1XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/Flights/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/Flights/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRmxpZ2h0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/Passengers/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/Passengers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGFzc2VuZ2Vyc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/Personal/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/Personal/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGVyc29uYWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/Shared/_Layout.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/Users/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Areas/Admin/Views/_ViewStart.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Account/Login.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Account/Register.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Checkout/Passengers.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Checkout/Passengers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcUGFzc2VuZ2Vycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Checkout/PaymentConfirm.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Checkout/PaymentConfirm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcUGF5bWVudENvbmZpcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Checkout/PaymentSuccess.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Checkout/PaymentSuccess.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcUGF5bWVudFN1Y2Nlc3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Checkout/SearchTicket.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Checkout/SearchTicket.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcU2VhcmNoVGlja2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Checkout/Seats.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Checkout/Seats.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcU2VhdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Checkout/TicketInformation.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Checkout/TicketInformation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcVGlja2V0SW5mb3JtYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Flights/FlightSearchOnWay.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Flights/FlightSearchOnWay.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xGbGlnaHRTZWFyY2hPbldheS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Flights/FlightSearchReturn.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Flights/FlightSearchReturn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xGbGlnaHRTZWFyY2hSZXR1cm4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Flights/FlightSearchRoundTrip.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Flights/FlightSearchRoundTrip.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xGbGlnaHRTZWFyY2hSb3VuZFRyaXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Flights/Index.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Flights/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Flights/Privacy.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Flights/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Shared/Error.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Shared/_Layout.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Shared/_LoginPartial.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/_ViewImports.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAnCN1/DemoMayBayCN/DemoMayBayCN/Views/_ViewStart.cshtml]
+[D:/DoAnCN1/DemoMayBayCN/dacn_banvemaybay/DemoMayBayCN/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

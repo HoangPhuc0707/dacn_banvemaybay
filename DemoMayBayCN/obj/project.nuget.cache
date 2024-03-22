@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MIQ63TRHI4TKMxI/UuIY8yv89RdSmhuu7L63i8+gSqBqe/Kok2cnHqKFCaTbEnhCBoO3CQKejHInDbPqNhLUtg==",
+  "dgSpecHash": "c6BB6UZ5GfkMoy1p9D6RpT7wjHXaHCpmc3mp6tEfejZhfIZ7E6GShZ5sjBxYuxoFsuLXWbKHqNHGbsv8MYYIWA==",
   "success": true,
-  "projectFilePath": "D:\\DoAnCN1\\DemoMayBayCN\\DemoMayBayCN\\DemoMayBayCN.csproj",
+  "projectFilePath": "D:\\DoAnCN1\\DemoMayBayCN\\dacn_banvemaybay\\DemoMayBayCN\\DemoMayBayCN.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguye\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\nguye\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
